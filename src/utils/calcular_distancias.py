@@ -1,6 +1,7 @@
 import csv
 import json
 from pathlib import Path
+import re
 
 def carregas_grafos_pesos(csv_path):
     grafo = {}
@@ -118,8 +119,27 @@ def main():
         writer = csv.DictWriter(f, fieldnames=['X', 'Y', 'bairro_X', 'bairro_Y', 'custo', 'caminho'])
         writer.writeheader()
         writer.writerows(resultados)
-    json_path = output_path.parent / 'distancia_caminhos.json'
-    with open(json_path, 'w', encoding='utf-8') as jf:
-        json.dump({'distancias': distancias}, jf, ensure_ascii=False, indent=2)
+
+    def safe_arquivo(s: str) -> str:
+        s = s.strip()
+        s = s.replace(' ', '_')
+        s = re.sub(r"[^A-Za-z0-9_\-]", '', s)
+        return s
+
+    for r in resultados:
+        bx = r['bairro_X']
+        by = r['bairro_Y']
+        arquivo = f"distancia_{safe_arquivo(bx)}__{safe_arquivo(by)}.json"
+        arquivo_path = output_path.parent / arquivo
+        data = {
+            'bairro_X': bx,
+            'bairro_Y': by,
+            'X': r['X'],
+            'Y': r['Y'],
+            'custo': r['custo'],
+            'caminho': r['caminho']
+        }
+        with open(arquivo_path, 'w', encoding='utf-8') as jf:
+            json.dump(data, jf, ensure_ascii=False, indent=2)
     
 main()

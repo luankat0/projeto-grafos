@@ -1,0 +1,17 @@
+{
+  "bairro_X": "Nova Descoberta",
+  "bairro_Y": "Boa Viagem(Setubal)",
+  "custo": 11.0,
+  "caminho": [
+    "Nova Descoberta",
+    "Casa Amarela",
+    "Tamarineira",
+    "Gracas",
+    "Madalena",
+    "Ilha do Retiro",
+    "Afogados",
+    "Imbiribeira",
+    "Boa Viagem",
+    "Boa Viagem(Setubal)"
+  ]
+}
