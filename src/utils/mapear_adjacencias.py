@@ -50,8 +50,8 @@ LUGAR_QUERY = "Recife, Pernambuco, Brasil"
 # Sistema de Referência de Coordenadas (CRS), em metros
 PROJ_CRS = "EPSG:32725"
 
-GEOJSON_SAIDA = "src/utils/geojson_data/bairros_recife.geojson"
-CSV_SAIDA = "data/adjacencias_bairros.csv"
+GEOJSON_SAIDA = "src/utils/geojson_data/bair_recife.geojson"
+CSV_SAIDA = "data/adjacencias_recife.csv"
 
 
 def fetch_bairro_geometry(bairro_nome: str, lugar_query: str, ) -> gpd.GeoDataFrame | None:
