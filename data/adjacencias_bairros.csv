@@ -1,256 +1,233 @@
-bairro_origem,bairro_destino
-Recife,Santo Antônio 
-Recife,Santo Amaro 
-Campo Grande,Santo Amaro 
-Santo Amaro,Torreão 
-Espinheiro,Santo Amaro 
-Santo Amaro,Soledade  
-Boa Vista,Santo Amaro 
-Boa Vista,Espinheiro 
-Boa Vista,Graças 
-Boa Vista,Derby 
-Boa Vista,Paissandu  
-Boa Vista,Soledade 
-Boa Vista,Ilha do Leite 
-Boa Vista,Santo Antônio 
-Boa Vista,Coelhos 
-Cabanga,Pina 
-Cabanga,São José 
-Afogados,Cabanga 
-Coelhos,Ilha do leite 
-Ilha do leite,Paissandu 
-Ilha Joana Bezerra,Ilha do leite 
-Derby,Paissandu 
-Madalena,Paissandu  
-Ilha do Retiro,Paissandu 
-Ilha Joana Bezerra,Paissandu 
-Santo Amaro,Santo Antônio 
-Coelhos,Santo Antônio 
-Recife,São José 
-Santo Antônio,São José 
-Coelhos,São José 
-Ilha Joana Bezerra,São José 
-Afogados,São José 
-Pina,São José  
-Brasilia Teimosa,São José 
-Coelhos,Ilha Joana Bezerra 
-Ilha Joana Bezerra,Ilha do Retiro 
-Afogados,Ilha Joana Bezerra  
-Arruda,Peixinhos 
-Arruda,Campina do Barreto 
-Arruda,Água Fria  
-Arruda,Bomba do Hemetério 
-Arruda,Mangabeira 
-Arruda,Tamarineira 
-Arruda,Ponto de Parada  
-Arruda,Campo Grande  
-Campina do Barreto,Peixinhos 
-Cajueiro,Campina do Barreto 
-Campina do Barreto,Fundão 
-Campina do Barreto,Água Fria 
-Campo Grande,Peixinhos 
-Campo Grande,Ponto de Parada 
-Campo Grande,Hipódromo 
-Campo Grande,Encruzilhada 
-Campo Grande,Torreão 
-Encruzilhada,Hipódromo 
-Encruzilhada,Ponto de Parada 
-Encruzilhada,Rosarinho 
-Encruzilhada,Graças 
-Aflitos,Encruzilhada 
-Encruzilhada,Espinheiro 
-Encruzilhada,Torreão 
-Arruda,Hipódromo 
-Hipódromo,Ponto de Parada 
-Ponto de Parada,Tamarineira 
-Ponto de Parada,Rosarinho 
-Rosarinho,Tamarineira 
-Graças,Rosarinho 
-Aflitos,Rosarinho 
-Espinheiro,Torreão 
-Fundão,Água Fria 
-Porto da Madeira,Água Fria 
-Beberibe,Água Fria 
-Linha do Tiro,Água Fria 
-Alto Santa Teresinha,Água Fria 
-Bomba do Hemetério,Água Fria  
-Alto Santa Terezinha,Linha do Tiro 
-Alto José Bonifácio,Alto Santa Terezinha 
-Alto Santa Terezinha,Morro da Conceição 
-Alto José do Pinho,Alto Santa Terezinha 
-Alto Santa Terezinha,Bomba do Hemetério 
-Alto José do Pinho,Bomba do Hemetério 
-Bomba do Hemetério,Mangabeira 
-Cajueiro,Porto da Madeira 
-Cajueiro,Fundão 
-Fundão,Porto da Madeira 
-Beberibe,Porto da Madeira 
-Beberibe,Linha do Tiro 
-Beberibe,Dois Unidos 
-Dois Unidos,Passarinho 
-Dois Unidos,Linha do Tiro 
-Alto José Bonifácio,Linha do Tiro 
-Aflitos,Graças 
-Aflitos,Espinheiro  
-Alto do Mandu,Casa Amarela 
-Alto do Mandu,Nova Descoberta 
-Alto do Mandu,Macaxeira 
-Alto do Mandu,Apipucos 
-Alto do Mandu,Monteiro 
-Apipucos,Iputinga  
-Apipucos,Monteiro 
-Apipucos,Macaxeira 
-Apipucos,Córrego do Jenipapo 
-Apipucos,Dois Irmãos 
-Apipucos,Caxangá 
-Casa Amarela,Tamarineira 
-Casa Amarela,Mangabeira 
-Alto José do Pinho,Casa Amarela 
-Casa Amarela,Morro da Conceição 
-Casa Amarela,Vasco da Gama 
-Casa Amarela,Nova Descoberta 
-Casa Amarela,Monteiro 
-Casa Amarela,Casa Forte 
-Casa Amarela,Parnamirim 
-Casa Forte,Parnamirim 
-Casa Forte,Poço 
-Casa Forte,Santana 
-Derby,Graças 
-Derby,Madalena 
-Derby,Ilha do Retiro 
-Dois Irmãos,Sítio dos Pintos 
-Caxangá,Dois Irmãos 
-Córrego do Jenipapo,Dois Irmãos 
-Dois Irmãos,Guabiraba  
-Espinheiro,Graças 
-Graças,Tamarineira 
-Graças,Jaqueira 
-Graças,Torre 
-Graças,Madalena  
-Jaqueira,Tamarineira 
-Jaqueira,Parnamirim 
-Jaqueira,Santana 
-Jaqueira,Torre 
-Iputinga,Monteiro 
-Monteiro,Poço  
-Parnamirim,Tamarineira 
-Parnamirim,Santana 
-Casa Amarela,Poço 
-Iputinga,Poço 
-Cordeiro,Poço 
-Poço,Santana 
-Cordeiro,Santana 
-Santana,Torre  
-Caxangá,Sítio dos Pintos 
-Mangabeira,Tamarineira 
-Alto José do Pinho,Tamarineira 
-Alto José Bonifácio,Vasco da Gama 
-Alto José Bonifácio,Morro da Conceição 
-Alto José Bonifácio,Alto José do Pinho 
-Alto José do Pinho,Morro da Conceição 
-Alto José do Pinho,Mangabeira 
-Alto Santa Terezinha,Água Fria 
-Nova Descoberta,Vasco da Gama 
-Morro da Conceição,Vasco da Gama 
-Brejo da Guabiraba,Guabiraba 
-Brejo da Guabiraba,Córrego do Jenipapo 
-Brejo da Guabiraba,Nova Descoberta 
-Brejo da Guabiraba,Passarinho 
-Brejo de Beberibe,Dois Unidos 
-Brejo de Beberibe,Passarinho 
-Brejo da Guabiraba,Brejo de Beberibe 
-Brejo de Beberibe,Nova Descoberta 
-Brejo de Beberibe,Vasco da Gama 
-Alto José Bonifácio,Brejo de Beberibe 
-Brejo de Beberibe,Linha do Tiro 
-Córrego do Jenipapo,Nova Descoberta 
-Córrego do Jenipapo,Guabiraba 
-Córrego do Jenipapo,Macaxeira  
-Guabiraba,Pau-Ferro 
-Macaxeira,Nova Descoberta  
-Guabiraba,Passarinho 
-Cordeiro,Iputinga 
-Cordeiro,Engenho do Meio 
-Cordeiro,Torrões 
-Cordeiro,San Martin 
-Cordeiro,Prado 
-Cordeiro,Zumbi 
-Cordeiro,Torre 
-Ilha do Retiro,Madalena 
-Ilha do Retiro,Prado 
-Afogados,Ilha do Retiro 
-Caxangá,Iputinga 
-Iputinga,Várzea 
-Cidade Universitária,Iputinga 
-Engenho do Meio,Iputinga 
-Madalena,Torre 
-Madalena,Zumbi 
-Madalena,Prado 
-Prado,Zumbi 
-Prado,San Martin 
-Bongi,Prado 
-Afogados,Prado 
-Torre,Zumbi 
-Cidade Universitária,Engenho do Meio 
-Curado,Engenho do Meio 
-Engenho do Meio,Torrões 
-San Martin,Torrões 
-Curado,Torrões 
-Caxangá,Várzea 
-Cidade Universitária,Várzea 
-Cidade Universitária,Curado 
-Curado,Várzea 
-Afogados,Mustardinha 
-Afogados,Mangueira 
-Afogados,Jiquiá 
-Afogados,Imbiribeira  
-Afogados,Bongi 
-Bongi,San Martin 
-Bongi,Mustardinha 
-Mangueira,Mustardinha 
-Mangueira,San Martin 
-Jiquiá,Mangueira 
-Mustardinha,San Martin  
-Curado,San Martin 
-Jardim São Paulo,San Martin 
-Jiquiá,San Martin 
-Areias,Imbiribeira 
-Areias,Jiquiá 
-Areias,Estância 
-Areias,Jardim São Paulo 
-Areias,Barro 
-Areias,Ibura 
-Areias,Caçote 
-Areias,Ipsep 
-Caçote,Ibura 
-Caçote,Ipsep 
-Estância,Jiquiá 
-Estância,San Martin 
-Estância,Jardim São Paulo 
-Imbiribeira,Jiquiá 
-Barro,Tejipió 
-Barro,Jardim São Paulo 
-Barro,Ibura 
-Barro,Cohab 
-Coqueiral,Sancho 
-Curado,Jardim São Paulo 
-Curado,Sancho 
-Curado,Totó 
-Jardim São Paulo,Tejipió 
-Sancho,Totó 
-Sancho,Tejipió 
-Curado,Tejipió 
-Coqueiral,Tejipió 
-Coqueiral,Totó 
-Boa Viagem,Jordão 
-Boa Viagem,Ibura 
-Boa Viagem,Imbiribeira 
-Boa Viagem,Pina 
-Brasília Teimosa,Pina 
-Imbiribeira,Pina 
-Imbiribeira,Ipsep 
-Ibura,Imbiribeira 
-Ibura,Ipsep 
-Cohab,Ibura 
-Ibura,Jordão 
-Cohab,Jordão 
+bairro_origem,bairro_destino,logradouro,observacao,peso
+Recife,Santo Antonio,Pte. Buarque de Macedo,,2
+Recife,Santo Amaro,Av. Norte Miguel Arraes de Alencar,,3
+Campo Grande,Santo Amaro,R. Odorico Mendes,,1
+Santo Amaro,Torreao,R. Prof. Othon Paraiso,,1
+Espinheiro,Santo Amaro,Av. Joao de Barros,,3
+Santo Amaro,Soledade,R. Joaquim Felipe,,1
+Boa Vista,Santo Amaro,R. Dom Vital,,1
+Boa Vista,Espinheiro,R. Buenos Aires,,1
+Boa Vista,Gracas,R. Joao Fernandes Vieira,,1
+Boa Vista,Derby,Av. Govenador Carlos de Lima Cavalcanti,,3
+Boa Vista,Paissandu,Av. Manoel Borba,,3
+Boa Vista,Soledade,R. do Progresso,,1
+Boa Vista,Ilha do Leite,R. Marques Amorim,,1
+Boa Vista,Santo Antonio,Av. Capibaribe Rio,,3
+Boa Vista,Coelhos,R. Sao Goncalo,,1
+Cabanga,Pina,Pte. Gov. Paulo Guerra,,2
+Cabanga,Sao Jose,Av. Eng. Jose Estelita,,3
+Afogados,Cabanga,R. Escritor Souza Barro,,1
+Coelhos,Ilha do leite,R. Francisco Alves,,1
+Ilha do leite,Paissandu,Av. Frei Matias Teves,,3
+Ilha Joana Bezerra,Ilha do leite,Av. Gov. Agamenon Magalhaes,,3
+Derby,Paissandu,R. Epam de Melo,,1
+Ilha do Retiro,Paissandu,R. Visconde do Livramento,,1
+Ilha Joana Bezerra,Paissandu,Pte. Jose Bezerra de Lima,,2
+Santo Amaro,Santo Antonio,R. Princesa Isabel,,1
+Coelhos,Santo Antonio,R. Velha,,1
+Recife,Sao Jose,Pte. 12 de Setembro,,2
+Santo Antonio,Sao Jose,Av. Martins de Barros,,3
+Coelhos,Sao Jose,Pte. 6 de Marco,,2
+Ilha Joana Bezerra,Sao Jose,R. Dom Paulo II,,1
+Afogados,Sao Jose,R. Imperial,,1
+Brasilia Teimosa,Sao Jose,Av. Brasilia Teimosa,"Avenida e separada dos bairros, ela fica no mar",3
+Coelhos,Ilha Joana Bezerra,Pte. Viaduto Joaquim Cardoso,,2
+Ilha Joana Bezerra,Ilha do Retiro,R. Pref. Jorge Martins,,1
+Arruda,Peixinhos,Av. Prof. Jose dos Anjos,,3
+Arruda,Campina do Barreto,Av. Poe. Vinicius de Moraes,,3
+Arruda,Agua Fria,R. da Regeneracao,,1
+Arruda,Bomba do Hemeterio,R. Sao Bento,,1
+Arruda,Mangabeira,R. Jacob,,1
+Arruda,Tamarineira,Estr. Velha de Agua Fria,,1
+Arruda,Ponto de Parada,R. Peonila Botelho,,1
+Arruda,Campo Grande,R. Jeronimo Vilela,,1
+Campina do Barreto,Peixinhos,R. Dr. Elias Gomes,,1
+Cajueiro,Campina do Barreto,R. dos Cavaleiros,,1
+Campina do Barreto,Fundao,R. Cel. Urbano Ribeiro de Sena,,1
+Campina do Barreto,Agua Fria,R. das Mocas,,1
+Campo Grande,Peixinhos,R. Farias Neves,,1
+Campo Grande,Ponto de Parada,R. Pe. Villeman,//,1
+Campo Grande,Hipodromo,R. Francisco Berenguer,,1
+Campo Grande,Encruzilhada,Estr. de Belem,,1
+Campo Grande,Torreao,R. Dom J. Costa,,1
+Encruzilhada,Hipodromo,R. Frederico,,1
+Encruzilhada,Ponto de Parada,Av. Beberibe Santa Cruz Futebol Clube,,3
+Encruzilhada,Rosarinho,R. Salvador de Sa,,1
+Encruzilhada,Gracas,R. Teles Junior,,1
+Aflitos,Encruzilhada,R. Carneiro Vilela,,1
+Encruzilhada,Espinheiro,R. Marques do Parana,,1
+Encruzilhada,Torreao,R. Padre Miguelinho,,1
+Hipodromo,Ponto de Parada,R. Mem de Sa,,1
+Ponto de Parada,Tamarineira,Av. Prof Jose dos Anjos,//,3
+Ponto de Parada,Rosarinho,R. Couto Magalhaes,,1
+Rosarinho,Tamarineira,R. Eng. Magalhaes Melo,,1
+Gracas,Rosarinho,Av. Santos Dumont,,3
+Espinheiro,Torreao,R. Djalma Farias,,1
+Fundao,Agua Fria,Av. Beberibe,,3
+Porto da Madeira,Agua Fria,R. Conselheiro Barreto,,1
+Beberibe,Agua Fria,R. Alto do Guilhermino,,1
+Linha do Tiro,Agua Fria,R. Alto do Deodato,,1
+Alto Santa Teresinha,Agua Fria,R. Tamboara,,1
+Bomba do Hemeterio,Agua Fria,R. Aline,,1
+Alto Santa Terezinha,Linha do Tiro,R. Prof. Jose Amarino dos Reis,,1
+Alto Jose Bonifacio,Alto Santa Terezinha,R. Corrego Jose Grande,,1
+Alto Santa Terezinha,Morro da Conceicao,R. Padre Oliveira,,1
+Alto Jose do Pinho,Alto Santa Terezinha,R. Planaltina,,1
+Alto Santa Terezinha,Bomba do Hemeterio,R. Aurea,,1
+Alto Jose do Pinho,Bomba do Hemeterio,R. Cecilia Reis,,1
+Bomba do Hemeterio,Mangabeira,R. Maria Goncalves,,1
+Cajueiro,Porto da Madeira,Av. Sebastiao Salazar,,3
+Cajueiro,Fundao,R. Pascoal Sivini,,1
+Fundao,Porto da Madeira,R. Capane,,1
+Beberibe,Porto da Madeira,R. do Anil,,1
+Beberibe,Linha do Tiro,R. Alto dos Coqueiros,,1
+Beberibe,Dois Unidos,Av. Hildebrando de Vasconcelos,,3
+Dois Unidos,Passarinho,R. Cel. Pilar,,1
+Dois Unidos,Linha do Tiro,R. Guaraja,,1
+Alto Jose Bonifacio,Linha do Tiro,R. Alto da Serrinha,,1
+Aflitos,Gracas,R. da Angustra,,1
+Aflitos,Espinheiro,R. Quarenta e Oito,,1
+Alto do Mandu,Casa Amarela,Av. Malaco,,3
+Alto do Mandu,Nova Descoberta,R. Conduru,,1
+Alto do Mandu,Apipucos,R. Aroeira,,1
+Alto do Mandu,Monteiro,R. Siriji,,1
+Apipucos,Iputinga,Av. da Recuperacao,,3
+Apipucos,Monteiro,R. de Apipucos,,1
+Apipucos,Macaxeira,R. Cel. Joao Batista do Rego Barros,,1
+Apipucos,Corrego do Jenipapo,Rod. Governador Mario Covas,,3
+Apipucos,Dois Irmaos,R. Caetes,,1
+Apipucos,Caxanga,R. Zuleide de Moura,O logradouro entra apenas um pouco em Apipucos,1
+Casa Amarela,Tamarineira,R. Prof. Souto Maior,,1
+Casa Amarela,Mangabeira,R. Mangabeira,,1
+Alto Jose do Pinho,Casa Amarela,R. Principal,,1
+Casa Amarela,Morro da Conceicao,Estr. Morro da Conceicao,,1
+Casa Amarela,Vasco da Gama,R. Costa RIbeiro,,1
+Casa Amarela,Nova Descoberta,R. Paraisopolis,,1
+Casa Amarela,Monteiro,Estr. do Encanamento,,1
+Casa Amarela,Casa Forte,R. Mal Rondon,,1
+Casa Amarela,Parnamirim,R. Ferreira Lopes,,1
+Casa Forte,Parnamirim,R. Alfredo Fernandes,,1
+Casa Forte,Poco,R. Jaco Veloniso,,1
+Casa Forte,Santana,R. Henrique Machado,,1
+Derby,Gracas,R. Monsenhor Ambrosino Leite,,1
+Derby,Madalena,R. Dr. Severino Pinheiro,,1
+Dois Irmaos,Sitio dos Pintos,Estr. dos Pintos,,1
+Caxanga,Dois Irmaos,Estr. Manuel de Medeiros,,1
+Dois Irmaos,Guabiraba,Estr. de Pau Ferro,,1
+Espinheiro,Gracas,R. da Hora,,1
+Gracas,Tamarineira,R. Cap. Sampaio Xavier,,1
+Gracas,Jaqueira,R. do Futuro,,1
+Gracas,Torre,R. Amelia,,1
+Gracas,Madalena,R. Joaquim Nabuco,,1
+Jaqueira,Tamarineira,R. Padre Roma,,1
+Jaqueira,Parnamirim,R. Abelardo Carneiro Lobo,,1
+Jaqueira,Santana,R. Leonardo Bezerra Cavalcante,,1
+Jaqueira,Torre,R. Joao Tude de Melo,,1
+Iputinga,Monteiro,Pte. Eng. Jaime Gusmao,,2
+Monteiro,Poco,R. Jorge de Albuquerque,,1
+Parnamirim,Tamarineira,R. Sebastiao Alves,,1
+Parnamirim,Santana,R. Joaquim Soares,,1
+Casa Amarela,Poco,R. Eng. Oscar Ferreira,,1
+Poco,Santana,R. Dr. Luiz Ribeiro Bastos,,1
+Cordeiro,Santana,Psa. Santana-Vila Santa Luzia,,2
+Santana,Torre,R. Jose Bonifacio,,1
+Caxanga,Sitio dos Pintos,R. Manuel de Medeiros,,1
+Alto Jose do Pinho,Tamarineira,R. Monte Horebe,,1
+Alto Jose Bonifacio,Morro da Conceicao,R. Ipanema,,1
+Alto Jose Bonifacio,Alto Jose do Pinho,R. Uniao da Vitoria,,1
+Alto Jose do Pinho,Morro da Conceicao,R. Descida da Macaiaba,,1
+Alto Jose do Pinho,Mangabeira,R. Avenca,,1
+Alto Santa Terezinha,Agua Fria,R. Ladeira de Pedra,,1
+Nova Descoberta,Vasco da Gama,R. Araguaina,,1
+Morro da Conceicao,Vasco da Gama,R. Adalberto Guerra,,1
+Brejo da Guabiraba,Guabiraba,R. Sr. do Bonfim,,1
+Brejo da Guabiraba,Corrego do Jenipapo,R. Aracari,,1
+Brejo da Guabiraba,Nova Descoberta,R. Tupiramba,,1
+Brejo da Guabiraba,Passarinho,R. Santa Tereza,,1
+Brejo de Beberibe,Dois Unidos,R. Dr. Antonio da Rosa Borges,,1
+Brejo de Beberibe,Passarinho,R. Selma,,1
+Brejo da Guabiraba,Brejo de Beberibe,R. Francisco Camarino,,1
+Brejo de Beberibe,Nova Descoberta,R. Pindai,,1
+Brejo de Beberibe,Vasco da Gama,R. Diadema,,1
+Alto Jose Bonifacio,Brejo de Beberibe,Av. Ver. Otacilio Azevedo,,3
+Brejo de Beberibe,Linha do Tiro,R. Bismark de Freitas,,1
+Corrego do Jenipapo,Nova Descoberta,R. Alto do Venancio,,1
+Corrego do Jenipapo,Macaxeira,R. Anita,,1
+Guabiraba,Pau-Ferro,Estr. do Orfanato,,1
+Macaxeira,Nova Descoberta,R. Antonio Carneiro,,1
+Cordeiro,Iputinga,R. Bom Pastor,,1
+Cordeiro,Engenho do Meio,R. Presidente Washington Luiz,,1
+Cordeiro,Torroes,Av. Inacio Monteiro,,3
+Cordeiro,San Martin,Av. Gen. San Martin,,3
+Cordeiro,Prado,R. Adelaide,,1
+Cordeiro,Zumbi,R. Honorio Correia,,1
+Cordeiro,Torre,R. Jornalista Luiz Teixeira,,1
+Ilha do Retiro,Madalena,Estr. dos Remedios,,1
+Ilha do Retiro,Prado,R. Padre Teofilo Tworz,,1
+Afogados,Ilha do Retiro,R. Joao Ivo da Silva,,1
+Caxanga,Iputinga,R. Min. Joao Aberto,,1
+Iputinga,Varzea,Av. Professor Chaves Batista,,3
+Cidade Universitaria,Iputinga,R. Gaspar Perez,,1
+Engenho do Meio,Iputinga,R. Manoel Estevao da Costa,,1
+Madalena,Torre,R. Real da Torre,,1
+Madalena,Zumbi,R. Paraguassu,,1
+Madalena,Prado,R. Austro Costa,,1
+Prado,Zumbi,R. Gomes Taborda,,1
+Bongi,Prado,Av. Eng. Abdias de Carvalho,,3
+Afogados,Prado,Estr. do Bongi,,1
+Torre,Zumbi,R. Conselheiro Theodoro,,1
+Cidade Universitaria,Engenho do Meio,R. Lindolfo Color,,1
+Curado,Engenho do Meio,R. Antonio Curado,,1
+Engenho do Meio,Torroes,R. Araruna,,1
+San Martin,Torroes,R. Vinte e Um de Abril,,1
+Curado,Torroes,R. Dr. Flavio Ferreira da Silva Marojo,,1
+Caxanga,Varzea,R. Ribeiro Pessoa,,1
+Cidade Universitaria,Varzea,Av. dos Economistas,,3
+Cidade Universitaria,Curado,Av. Prof. Luiz Freire,,3
+Afogados,Mustardinha,R. Ernesto Cavalcanti,,1
+Afogados,Mangueira,Av. Central,,3
+Afogados,Jiquia,R. Sao Miguel,,1
+Afogados,Imbiribeira,R. Arquiteto Luiz Nunes,,1
+Afogados,Bongi,R. Maria Jose de Lima,,1
+Bongi,San Martin,R. Dona Maria Augusta Nogueira,,1
+Bongi,Mustardinha,R. Pocrane,,1
+Mangueira,Mustardinha,R. Coracao de Jesus,,1
+Mangueira,San Martin,R. Medina,,1
+Jiquia,Mangueira,R. Palestina,,1
+Mustardinha,San Martin,R. Itaquari,,1
+Curado,San Martin,R. Cel. Mizael de Mendonca,,1
+Jardim Sao Paulo,San Martin,Av. Recife,,3
+Jiquia,San Martin,R. Nova Europa,,1
+Areias,Jiquia,R. Elizeu Cezar,,1
+Areias,Estancia,R. Tupy,,1
+Areias,Jardim Sao Paulo,Av. Sao Paulo,,3
+Areias,Barro,R. Caruaru,,1
+Areias,Cacote,R. Luiz Sepulveda,,1
+Estancia,Jiquia,R. Juarez Millet,,1
+Estancia,Jardim Sao Paulo,R. Nossa Senhora de Fatima,,1
+Barro,Tejipio,R. Luiz Soares,,1
+Barro,Jardim Sao Paulo,R. Italacy,,1
+Barro,Cohab,Av. Engenho Muribeca,,3
+Coqueiral,Sancho,R. Manduzinho,,1
+Curado,Jardim Sao Paulo,R. Paulopolis,,1
+Curado,Sancho,R. Andre Mota,,1
+Curado,Toto,R. Leao XIII,,1
+Jardim Sao Paulo,Tejipio,R. Prof Henquire,,1
+Sancho,Toto,R. Serrinha,,1
+Sancho,Tejipio,R. Dracena,,1
+Curado,Tejipio,Estr. do Curado,,1
+Coqueiral,Tejipio,R. Alcantara,,1
+Coqueiral,Toto,R. Brumado,,1
+Boa Viagem,Jordao,Av. Julio Cesar,,3
+Boa Viagem,Ibura,Estr. de Ferro Sao Francisco,,1
+Boa Viagem,Imbiribeira,R. Soldado Sinesio de Aragao,,1
+Boa Viagem,Pina,R. Joaquim Carneiro da Silva,,1
+Brasilia Teimosa,Pina,R. Artur Bernardes,,1
+Imbiribeira,Pina,R. Sao Jose,,1
+Imbiribeira,Ipsep,R. Itacare,,1
+Ibura,Imbiribeira,R. Goncalves Magalhaes,,1
+Ibura,Ipsep,R. Aderbal de Melo,,1
+Ibura,Jordao,R. Edgar Campelo,,1
+Cohab,Ibura,R. Rio Tapado,,1
+Cohab,Jordao,R. Atalaia,,1
+Boa Viagem,Boa Viagem(Setubal),Av. Visc. de Jequitinhonha,,3
