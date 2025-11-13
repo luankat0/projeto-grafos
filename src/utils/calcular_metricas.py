@@ -1,16 +1,9 @@
-"""
-Script para calcular métricas do grafo de bairros do Recife.
-Calcula ordem (|V|), tamanho (|E|) e densidade do grafo.
-Usa apenas bibliotecas padrão do Python - não requer instalação de pacotes.
-"""
-
 import csv
 import json
 from pathlib import Path
 
 
 def normalizar_nome(name):
-    """Normaliza nomes de bairros removendo acentos e padronizando."""
     letras = {
         'á': 'a', 'à': 'a', 'ã': 'a', 'â': 'a',
         'é': 'e', 'ê': 'e',

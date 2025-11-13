@@ -1,0 +1,48 @@
+{
+  "distancias": {
+    "Nova Descoberta-Boa Viagem(Setubal)": {
+      "caminho": [
+        "Nova Descoberta",
+        "Casa Amarela",
+        "Tamarineira",
+        "Gracas",
+        "Madalena",
+        "Ilha do Retiro",
+        "Afogados",
+        "Imbiribeira",
+        "Boa Viagem",
+        "Boa Viagem(Setubal)"
+      ]
+    },
+    "Dois Irmaos-Casa Amarela": {
+      "caminho": [
+        "Dois Irmaos",
+        "Apipucos",
+        "Monteiro",
+        "Casa Amarela"
+      ]
+    },
+    "Jaqueira-Derby": {
+      "caminho": [
+        "Jaqueira",
+        "Gracas",
+        "Derby"
+      ]
+    },
+    "Boa Viagem-Brasilia Teimosa": {
+      "caminho": [
+        "Boa Viagem",
+        "Pina",
+        "Brasilia Teimosa"
+      ]
+    },
+    "Macaxeira-Passarinho": {
+      "caminho": [
+        "Macaxeira",
+        "Nova Descoberta",
+        "Brejo da Guabiraba",
+        "Passarinho"
+      ]
+    }
+  }
+}

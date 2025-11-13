@@ -1,8 +1,9 @@
 import csv
+import json
 from pathlib import Path
 
 def carregas_grafos_pesos(csv_path):
-    graph = {}
+    grafo = {}
     vertices = set()
     
     with open(csv_path, 'r', encoding='utf-8') as f:
@@ -16,28 +17,28 @@ def carregas_grafos_pesos(csv_path):
             vertices.add(origem)
             vertices.add(destino)
             
-            if origem not in graph:
-                graph[origem] = {}
-            if destino not in graph:
-                graph[destino] = {}
+            if origem not in grafo:
+                grafo[origem] = {}
+            if destino not in grafo:
+                grafo[destino] = {}
             
-            graph[origem][destino] = peso
-            graph[destino][origem] = peso
+            grafo[origem][destino] = peso
+            grafo[destino][origem] = peso
     
-    return graph, vertices
+    return grafo, vertices
 
 
-def dijkstra(graph, origem, destino):
-    distancias = {bairro: float('inf') for bairro in graph}
+def dijkstra(grafo, origem, destino):
+    distancias = {bairro: float('inf') for bairro in grafo}
     distancias[origem] = 0
     visitados = set()
-    predecessores = {bairro: None for bairro in graph}
+    predecessores = {bairro: None for bairro in grafo}
     
-    while len(visitados) < len(graph):
+    while len(visitados) < len(grafo):
         menor_distancia = float('inf')
         vertice_atual = None
         
-        for bairro in graph:
+        for bairro in grafo:
             if bairro not in visitados and distancias[bairro] < menor_distancia:
                 menor_distancia = distancias[bairro]
                 vertice_atual = bairro
@@ -50,7 +51,7 @@ def dijkstra(graph, origem, destino):
         if vertice_atual == destino:
             break
         
-        for vizinho, peso in graph[vertice_atual].items():
+        for vizinho, peso in grafo[vertice_atual].items():
             if vizinho not in visitados:
                 nova_distancia = distancias[vertice_atual] + peso
                 if nova_distancia < distancias[vizinho]:
@@ -71,42 +72,54 @@ def main():
     base_path = Path(__file__).parent.parent.parent
     input_path = base_path / "data" / "adjacencias_bairros.csv"
     output_path = base_path / "out" / "distancia_enderecos.csv"
-    
     pares_especificos = [
-        ("Boa Vista", "Corrego do Jenipapo"),
+        ("Nova Descoberta", "Boa Viagem(Setubal)"),
         ("Dois Irmaos", "Casa Amarela"),
         ("Jaqueira", "Derby"),
         ("Boa Viagem", "Brasilia Teimosa"),
         ("Macaxeira", "Passarinho")
     ]
-    
-    graph, vertices = carregas_grafos_pesos(input_path)
+
+    enderecos = [
+        ("R. Dr. Alto Caeté 222", "Av. Visc. de Jequitinhonha 455"),
+        ("R. Dois Irmãos 1113 R.", "Padre Lemos 94"),
+        ("Rua Hoel Sette 144", "Av. Gov. Agamenon Magalhães 2132"),
+        ("R. Marquês de Valença 50", "R. Badejo 32"),
+        ("Av. José Américo de Almeida 811", "Estrada do Passarinho 2198")
+    ]
+
+    grafo, vertices = carregas_grafos_pesos(input_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    
+
     resultados = []
-    
-    for i, (bairro_x, bairro_y) in enumerate(pares_especificos, 1):
-        
-        if bairro_x not in graph:
+    distancias = {}
+
+    for (bairro_x, bairro_y), (addr_x, addr_y) in zip(pares_especificos, enderecos):
+        if bairro_x not in grafo or bairro_y not in grafo:
+            print(f"Um dos bairros não está no grafo: {bairro_x}, {bairro_y}")
             continue
-        if bairro_y not in graph:
-            continue
-        
-        custo, caminho = dijkstra(graph, bairro_x, bairro_y)
+
+        custo, caminho = dijkstra(grafo, bairro_x, bairro_y)
         caminho_str = " -> ".join(caminho) if caminho else "Sem caminho"
-        
+
         resultados.append({
-            'X': '',
-            'Y': '',
+            'X': addr_x,
+            'Y': addr_y,
             'bairro_X': bairro_x,
             'bairro_Y': bairro_y,
             'custo': custo if custo != float('inf') else 'Infinito',
             'caminho': caminho_str
         })
+
+        chave = f"{bairro_x}-{bairro_y}"
+        distancias[chave] = {'caminho': caminho}
     
     with open(output_path, 'w', encoding='utf-8', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=['X', 'Y', 'bairro_X', 'bairro_Y', 'custo', 'caminho'])
         writer.writeheader()
         writer.writerows(resultados)
+    json_path = output_path.parent / 'distancia_caminhos.json'
+    with open(json_path, 'w', encoding='utf-8') as jf:
+        json.dump({'distancias': distancias}, jf, ensure_ascii=False, indent=2)
     
 main()
