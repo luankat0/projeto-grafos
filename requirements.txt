@@ -1,0 +1,13 @@
+fuzzywuzzy==0.18.0
+geopandas==1.1.1
+matplotlib==3.10.7
+matplotlib-inline==0.2.1
+networkx==3.5
+numpy==2.3.4
+osmnx==2.0.6
+packaging==25.0
+pandas==2.3.3
+pyvis==0.3.2
+requests==2.32.5
+shapely==2.1.2
+Unidecode==1.4.0
