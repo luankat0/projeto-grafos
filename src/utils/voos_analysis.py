@@ -2,7 +2,6 @@ import csv
 import heapq
 import json
 import time
-import tracemalloc
 from pathlib import Path
 from collections import deque, defaultdict
 from datetime import datetime
@@ -389,15 +388,11 @@ def run_analysis():
     bfs_sources = [airport for airport, _ in top_airports[:3]]
     
     for source in bfs_sources:
-        tracemalloc.start()
         start_time = time.perf_counter()
         
         result = bfs(unweighted_graph, source)
         
         end_time = time.perf_counter()
-        current, peak = tracemalloc.get_traced_memory()
-        tracemalloc.stop()
-        
         elapsed = (end_time - start_time) * 1000
         
         cidade = airports[source]['cidade']
@@ -422,15 +417,11 @@ def run_analysis():
     dfs_sources = [airport for airport, _ in top_airports[2:5]]
     
     for source in dfs_sources:
-        tracemalloc.start()
         start_time = time.perf_counter()
         
         result = dfs(unweighted_graph, source)
         
         end_time = time.perf_counter()
-        current, peak = tracemalloc.get_traced_memory()
-        tracemalloc.stop()
-        
         elapsed = (end_time - start_time) * 1000
         
         cidade = airports[source]['cidade']
@@ -465,15 +456,11 @@ def run_analysis():
         dijkstra_pairs.append((top_5_airports[3], top_5_airports[2]))
     
     for source, target in dijkstra_pairs[:5]:
-        tracemalloc.start()
         start_time = time.perf_counter()
         
         result = dijkstra(weighted_graph, source, target)
         
         end_time = time.perf_counter()
-        current, peak = tracemalloc.get_traced_memory()
-        tracemalloc.stop()
-        
         elapsed = (end_time - start_time) * 1000
         
         cidade_orig = airports[source]['cidade']
@@ -518,15 +505,11 @@ def run_analysis():
     source = top_5_airports[0]
     all_nodes = set(weighted_graph_neg.keys())
     
-    tracemalloc.start()
     start_time = time.perf_counter()
     
     result_neg = bellman_ford(weighted_graph_neg, source, all_nodes)
     
     end_time = time.perf_counter()
-    current, peak = tracemalloc.get_traced_memory()
-    tracemalloc.stop()
-    
     elapsed = (end_time - start_time) * 1000
     
     print(f"   • Fonte: {source} ({airports[source]['cidade']})")
@@ -562,15 +545,11 @@ def run_analysis():
         
         all_nodes_cycle = set(weighted_graph_cycle.keys())
         
-        tracemalloc.start()
         start_time = time.perf_counter()
         
         result_cycle = bellman_ford(weighted_graph_cycle, a1, all_nodes_cycle)
         
         end_time = time.perf_counter()
-        current, peak = tracemalloc.get_traced_memory()
-        tracemalloc.stop()
-        
         elapsed = (end_time - start_time) * 1000
         
         print(f"   • Ciclo criado: {a1} → {a2} → {a3} → {a1}")
