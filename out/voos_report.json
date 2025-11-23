@@ -1,0 +1,130 @@
+{
+  "dataset": {
+    "vertices": 7,
+    "edges": 11,
+    "type": "Directed Weighted Graph (Flight Network)",
+    "out_degree": {
+      "avg": 1.57,
+      "min": 1,
+      "max": 5,
+      "distribution": {
+        "1": 6,
+        "5": 1
+      }
+    },
+    "in_degree": {
+      "avg": 1.57,
+      "min": 1,
+      "max": 5,
+      "distribution": {
+        "1": 6,
+        "5": 1
+      }
+    },
+    "density": 0.261905,
+    "weights": {
+      "avg": 13.53,
+      "min": 2.05,
+      "max": 16.11
+    }
+  },
+  "algorithms": {
+    "bfs_Miami": {
+      "source": "Miami",
+      "cidade": "Miami",
+      "nodes_reached": 7,
+      "layers": 3,
+      "time_ms": 0.09
+    },
+    "bfs_Afonso Pena": {
+      "source": "Afonso Pena",
+      "cidade": "Sao Jose Dos Pinhais",
+      "nodes_reached": 7,
+      "layers": 4,
+      "time_ms": 0.051
+    },
+    "bfs_Salgado Filho": {
+      "source": "Salgado Filho",
+      "cidade": "Porto Alegre",
+      "nodes_reached": 7,
+      "layers": 3,
+      "time_ms": 0.051
+    },
+    "dfs_Salgado Filho": {
+      "source": "Salgado Filho",
+      "cidade": "Porto Alegre",
+      "nodes_reached": 7,
+      "has_cycle": true,
+      "time_ms": 0.067
+    },
+    "dfs_Presidente Juscelino Kubitschek": {
+      "source": "Presidente Juscelino Kubitschek",
+      "cidade": "Brasilia",
+      "nodes_reached": 7,
+      "has_cycle": true,
+      "time_ms": 0.058
+    },
+    "dfs_Deputado Luis Eduardo Magalhaes": {
+      "source": "Deputado Luis Eduardo Magalhaes",
+      "cidade": "Salvador",
+      "nodes_reached": 7,
+      "has_cycle": true,
+      "time_ms": 0.079
+    },
+    "dijkstra_Miami_to_Afonso Pena": {
+      "origem": "Miami (Miami)",
+      "destino": "Afonso Pena (Sao Jose Dos Pinhais)",
+      "cost": 15.26,
+      "path_length": 2,
+      "time_ms": 0.073
+    },
+    "dijkstra_Miami_to_Presidente Juscelino Kubitschek": {
+      "origem": "Miami (Miami)",
+      "destino": "Presidente Juscelino Kubitschek (Brasilia)",
+      "cost": 13.33,
+      "path_length": 2,
+      "time_ms": 0.045
+    },
+    "dijkstra_Afonso Pena_to_Deputado Luis Eduardo Magalhaes": {
+      "origem": "Afonso Pena (Sao Jose Dos Pinhais)",
+      "destino": "Deputado Luis Eduardo Magalhaes (Salvador)",
+      "cost": 32.52,
+      "path_length": 4,
+      "time_ms": 0.054
+    },
+    "dijkstra_Salgado Filho_to_Miami": {
+      "origem": "Salgado Filho (Porto Alegre)",
+      "destino": "Miami (Miami)",
+      "cost": 16.11,
+      "path_length": 2,
+      "time_ms": 0.02
+    },
+    "dijkstra_Presidente Juscelino Kubitschek_to_Salgado Filho": {
+      "origem": "Presidente Juscelino Kubitschek (Brasilia)",
+      "destino": "Salgado Filho (Porto Alegre)",
+      "cost": 31.65,
+      "path_length": 4,
+      "time_ms": 0.04
+    },
+    "bellman_ford_negative_weights": {
+      "source": "Miami (Miami)",
+      "negative_edges": [
+        "Miami → Afonso Pena (-2.0)",
+        "Afonso Pena → Salgado Filho (-1.5)"
+      ],
+      "has_negative_cycle": false,
+      "time_ms": 0.191
+    },
+    "bellman_ford_negative_cycle": {
+      "cycle": "Miami → Afonso Pena → Salgado Filho → Miami",
+      "weights": "2.0 + 2.0 + (-8.0) = -4.0",
+      "has_negative_cycle": true,
+      "negative_cycle": [
+        "Miami",
+        "Afonso Pena",
+        "Salgado Filho"
+      ],
+      "time_ms": 0.186
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import csv
 import heapq
 import json
+import unicodedata
 from pathlib import Path
 from typing import Dict, List
 
@@ -38,6 +39,13 @@ def carregar_microrregiao(csv_path: Path) -> Dict[str, List[str]]:
                 if i < len(headers) and value.strip():
                     micror[headers[i]].append(value.strip())
     return micror
+
+
+def normalizar_nome(nome: str) -> str:
+
+    nome_sem_acento = unicodedata.normalize('NFD', nome)
+    nome_sem_acento = ''.join(char for char in nome_sem_acento if unicodedata.category(char) != 'Mn')
+    return nome_sem_acento.strip().lower()
 
 
 def calcular_graus(adj: Dict[str, Dict[str, float]]) -> Dict[str, int]:
@@ -97,17 +105,54 @@ def gerar_html(adj, micror_map, out_html: Path, highlight_path: List[str]):
     graus = calcular_graus(adj)
     dens_ego = calcular_ego_metrics(adj)
 
+    excecoes_nomes = {
+        'boa viagem(setubal)': 'Boa Viagem',
+        'alto santa terezinha': 'Alto Santa Teresinha'
+    }
+
     bairro_to_micror = {}
     for region, bairros in micror_map.items():
         for b in bairros:
             bairro_to_micror[b] = region
+            bairro_to_micror[normalizar_nome(b)] = region
+
+    micror_colors = {
+        '1.1': '#FF6B6B',  # Vermelho
+        '1.2': '#FF6B6B',
+        '1.3': '#FF6B6B',
+        '2.1': '#4ECDC4',  # Azul turquesa
+        '2.2': '#4ECDC4',
+        '2.3': '#4ECDC4',
+        '3.1': '#95E1D3',  # Verde água
+        '3.2': '#95E1D3',
+        '3.3': '#95E1D3',
+        '4.1': '#FFE66D',  # Amarelo
+        '4.2': '#FFE66D',
+        '4.3': '#FFE66D',
+        '5.1': '#C77DFF',  # Roxo
+        '5.2': '#C77DFF',
+        '5.3': '#C77DFF',
+        '6.1': '#FF9FF3',  # Rosa
+        '6.2': '#FF9FF3',
+        '6.3': '#FF9FF3'
+    }
 
     for node in sorted(adj.keys()):
         grau = graus.get(node, 0)
-        micror = bairro_to_micror.get(node, '')
+        
+        node_norm = normalizar_nome(node)
+        if node_norm in excecoes_nomes:
+            nome_correto = excecoes_nomes[node_norm]
+            micror = bairro_to_micror.get(nome_correto, '') or bairro_to_micror.get(normalizar_nome(nome_correto), '')
+        else:
+            micror = bairro_to_micror.get(node, '') or bairro_to_micror.get(node_norm, '')
+        
         dens = dens_ego.get(node, 0.0)
-        title = f'Grau: {grau} / Microrregiao: {micror} / Densidade ego: {dens:.3f}'
-        net.add_node(node, label=node, title=title)
+        
+        node_color = micror_colors.get(micror, '#97C2FC')  # Cor padrão azul claro
+        
+        title = f'Bairro: {node} / Grau: {grau} / Microrregiao: {micror} / Densidade ego: {dens:.3f}'
+        net.add_node(node, label=node, title=title, color=node_color)
 
     added = set()
     for origem, nbrs in adj.items():
