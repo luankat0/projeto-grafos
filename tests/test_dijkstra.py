@@ -4,7 +4,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent / 'src'))
 
-from utils.voos_analysis import dijkstra
+from graphs.algorithms import dijkstra
 
 
 class TestDijkstra:

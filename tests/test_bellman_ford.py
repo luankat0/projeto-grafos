@@ -4,7 +4,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent / 'src'))
 
-from utils.voos_analysis import bellman_ford
+from graphs.algorithms import bellman_ford
 
 
 class TestBellmanFord:

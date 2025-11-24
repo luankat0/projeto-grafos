@@ -3,6 +3,6 @@
   "bairro_Y": "Casa Amarela",
   "X": "R. Dois Irmãos 1113 R.",
   "Y": "Padre Lemos 94",
-  "custo": 3,
+  "custo": 3.0,
   "caminho": "Dois Irmaos -> Apipucos -> Monteiro -> Casa Amarela"
 }

@@ -34,35 +34,35 @@
       "cidade": "Miami",
       "nodes_reached": 7,
       "layers": 3,
-      "time_ms": 0.027
+      "time_ms": 0.133
     },
     "bfs_Afonso Pena": {
       "source": "Afonso Pena",
       "cidade": "Sao Jose Dos Pinhais",
       "nodes_reached": 7,
       "layers": 4,
-      "time_ms": 0.02
+      "time_ms": 0.012
     },
     "bfs_Salgado Filho": {
       "source": "Salgado Filho",
       "cidade": "Porto Alegre",
       "nodes_reached": 7,
       "layers": 3,
-      "time_ms": 0.013
+      "time_ms": 0.008
     },
     "dfs_Salgado Filho": {
       "source": "Salgado Filho",
       "cidade": "Porto Alegre",
       "nodes_reached": 7,
       "has_cycle": true,
-      "time_ms": 0.015
+      "time_ms": 0.012
     },
     "dfs_Presidente Juscelino Kubitschek": {
       "source": "Presidente Juscelino Kubitschek",
       "cidade": "Brasilia",
       "nodes_reached": 7,
       "has_cycle": true,
-      "time_ms": 0.009
+      "time_ms": 0.007
     },
     "dfs_Deputado Luis Eduardo Magalhaes": {
       "source": "Deputado Luis Eduardo Magalhaes",
@@ -76,35 +76,35 @@
       "destino": "Afonso Pena (Sao Jose Dos Pinhais)",
       "cost": 15.26,
       "path_length": 2,
-      "time_ms": 0.032
+      "time_ms": 0.026
     },
     "dijkstra_Miami_to_Presidente Juscelino Kubitschek": {
       "origem": "Miami (Miami)",
       "destino": "Presidente Juscelino Kubitschek (Brasilia)",
       "cost": 13.33,
       "path_length": 2,
-      "time_ms": 0.016
+      "time_ms": 0.01
     },
     "dijkstra_Afonso Pena_to_Deputado Luis Eduardo Magalhaes": {
       "origem": "Afonso Pena (Sao Jose Dos Pinhais)",
       "destino": "Deputado Luis Eduardo Magalhaes (Salvador)",
       "cost": 32.52,
       "path_length": 4,
-      "time_ms": 0.017
+      "time_ms": 0.013
     },
     "dijkstra_Salgado Filho_to_Miami": {
       "origem": "Salgado Filho (Porto Alegre)",
       "destino": "Miami (Miami)",
       "cost": 16.11,
       "path_length": 2,
-      "time_ms": 0.014
+      "time_ms": 0.004
     },
     "dijkstra_Presidente Juscelino Kubitschek_to_Salgado Filho": {
       "origem": "Presidente Juscelino Kubitschek (Brasilia)",
       "destino": "Salgado Filho (Porto Alegre)",
       "cost": 31.65,
       "path_length": 4,
-      "time_ms": 0.021
+      "time_ms": 0.013
     },
     "bellman_ford_negative_weights": {
       "source": "Miami (Miami)",
@@ -113,7 +113,7 @@
         "Afonso Pena → Salgado Filho (-1.5)"
       ],
       "has_negative_cycle": false,
-      "time_ms": 0.038
+      "time_ms": 0.051
     },
     "bellman_ford_negative_cycle": {
       "cycle": "Miami → Afonso Pena → Salgado Filho → Miami",
@@ -124,7 +124,7 @@
         "Afonso Pena",
         "Salgado Filho"
       ],
-      "time_ms": 0.041
+      "time_ms": 0.046
     }
   }
 }

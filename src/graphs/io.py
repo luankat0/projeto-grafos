@@ -1,4 +1,6 @@
 from pyvis.network import Network
+from pathlib import Path
+import csv
 import os
 
 bairros = [
@@ -27,6 +29,43 @@ net = Network(height="750px", width="100%", bgcolor="#ffffff", font_color="black
 for bairro in bairros:
     net.add_node(bairro, label=bairro)
 
-net.write_html("../../out/grafo_bairros.html")
+base_path = Path(__file__).parent.parent.parent
+output_html = base_path / 'out' / 'grafo_bairros.html'
+output_html.parent.mkdir(parents=True, exist_ok=True)
 
-print("✅ Grafo criado com sucesso! Abra o arquivo 'out/grafo_bairros.html' no navegador.")
+net.write_html(str(output_html))
+
+print("Grafo criado com sucesso: 'out/grafo_bairros.html'")
+
+
+def gerar_csv_bairros_microrregiao():
+    base_path = Path(__file__).parent.parent.parent
+    input_csv = base_path / 'data' / 'bairros_recife.csv'
+    output_csv = base_path / 'data' / 'bairros_unique.csv'
+    
+    bairros_data = []
+    
+    with open(input_csv, 'r', encoding='utf-8') as f:
+        reader = csv.reader(f)
+        headers = next(reader)
+        
+        for row in reader:
+            for i, bairro in enumerate(row):
+                if bairro.strip():
+                    microrregiao = headers[i] if i < len(headers) else ''
+                    bairros_data.append({
+                        'bairro': bairro.strip(),
+                        'microrregiao': microrregiao.strip()
+                    })
+    
+    output_csv.parent.mkdir(parents=True, exist_ok=True)
+    
+    with open(output_csv, 'w', encoding='utf-8', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=['bairro', 'microrregiao'])
+        writer.writeheader()
+        writer.writerows(bairros_data)
+    
+    print(f"CSV de bairros e microrregiões criado: {output_csv}")
+
+
+gerar_csv_bairros_microrregiao()

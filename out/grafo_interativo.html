@@ -53,8 +53,8 @@
 
 <div style="position:fixed;top:10px;left:10px;z-index:999;background:white;padding:8px;border-radius:6px;border:1px solid #ccc;">
     <div>
-        <input id="search_input" type="text" placeholder="Buscar bairro" style="width:180px; " />
-        <button onclick="searchNode()" style="border:none;border-radius:4px;" >Buscar</button>
+        <input id="search_input" type="text" placeholder="Buscar bairro" style="width:180px;" />
+        <button onclick="searchNode()" style="border:none;border-radius:4px;">Buscar</button>
     </div>
     <div style="margin-top:6px;">
         <button onclick="highlightPath()" style="border:none;border-radius:4px;">Realçar: Nova Descoberta → Boa Viagem(Setubal)</button>
@@ -62,6 +62,7 @@
 </div>
 
 <script>
+var pathData = ["Nova Descoberta", "Casa Amarela", "Tamarineira", "Gracas", "Madalena", "Ilha do Retiro", "Afogados", "Imbiribeira", "Boa Viagem", "Boa Viagem(Setubal)"];
 function searchNode(){
     var q = document.getElementById('search_input').value;
     if(!q) return;
@@ -69,7 +70,7 @@ function searchNode(){
 }
 
 function highlightPath(){
-    var path = ["Nova Descoberta", "Casa Amarela", "Tamarineira", "Gracas", "Madalena", "Ilha do Retiro", "Afogados", "Imbiribeira", "Boa Viagem", "Boa Viagem(Setubal)"];
+    var path = pathData;
     var allNodes = nodes.get();
     allNodes.forEach(function(n){ nodes.update({id:n.id, color:{background:'lightblue'}}); });
     var allEdges = edges.get();
@@ -80,7 +81,6 @@ function highlightPath(){
         nodes.update({id:nid, color:{background:col}});
         if(i<path.length-1){
             var a = path[i]; var b = path[i+1];
-            // find edges between a and b
             var matched = edges.get().filter(function(e){ return (e.from==a && e.to==b) || (e.from==b && e.to==a); });
             matched.forEach(function(e){ edges.update({id:e.id, color:{color:'red'}, width:3}); });
         }

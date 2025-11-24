@@ -3,6 +3,6 @@
   "bairro_Y": "Brasilia Teimosa",
   "X": "R. Marquês de Valença 50",
   "Y": "R. Badejo 32",
-  "custo": 2,
+  "custo": 2.0,
   "caminho": "Boa Viagem -> Pina -> Brasilia Teimosa"
 }
