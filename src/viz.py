@@ -9,9 +9,207 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).parent))
 from graphs.algorithms import dijkstra as dijkstra_base
+from graphs.io import gerar_grafo_bairros
 
 from pyvis.network import Network
 import matplotlib.pyplot as plt
+
+
+def criar_menu_navegacao():
+    return """
+<style>
+.menu-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10001;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    border: none;
+    border-radius: 8px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+.menu-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+.menu-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+.menu-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+.menu-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+.menu-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+.menu-sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100vh;
+    background: linear-gradient(180deg, #2c3e50 0%, #1a252f 100%);
+    box-shadow: -4px 0 20px rgba(0,0,0,0.4);
+    z-index: 10000;
+    transition: right 0.4s ease;
+    overflow-y: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.menu-sidebar.active {
+    right: 0;
+}
+.menu-header {
+    padding: 30px 20px;
+    color: white;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+}
+.menu-header h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+.menu-header p {
+    margin: 8px 0 0 0;
+    font-size: 13px;
+    opacity: 0.9;
+}
+.menu-links {
+    padding: 20px 0;
+}
+.menu-link {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+    gap: 12px;
+    font-size: 15px;
+}
+.menu-link:hover {
+    background: rgba(255,255,255,0.2);
+    border-left-color: white;
+    padding-left: 30px;
+}
+.menu-link.active {
+    background: rgba(255,255,255,0.25);
+    border-left-color: white;
+    font-weight: bold;
+}
+.menu-link .icon {
+    font-size: 20px;
+    width: 24px;
+    text-align: center;
+}
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+</style>
+
+<button class="menu-btn" id="menuBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<nav class="menu-sidebar" id="menuSidebar">
+    <div class="menu-header">
+        <h2>📊 Projeto Grafos</h2>
+        <p>Visualizações Interativas</p>
+    </div>
+    <div class="menu-links">
+        <a href="grafo_bairros.html" class="menu-link">
+            <span class="icon">🗺️</span>
+            <span>Grafo de Bairros</span>
+        </a>
+        <a href="arvore_percurso.html" class="menu-link">
+            <span class="icon">🌳</span>
+            <span>Árvore de Percurso</span>
+        </a>
+        <a href="grafo_interativo.html" class="menu-link">
+            <span class="icon">🏘️</span>
+            <span>Grafo Interativo Bairros</span>
+        </a>
+        <a href="grafo_voos_interativo.html" class="menu-link">
+            <span class="icon">✈️</span>
+            <span>Grafo de Voos</span>
+        </a>
+    </div>
+</nav>
+
+<script>
+(function() {
+    const menuBtn = document.getElementById('menuBtn');
+    const menuSidebar = document.getElementById('menuSidebar');
+    const menuOverlay = document.getElementById('menuOverlay');
+    
+    function toggleMenu() {
+        menuBtn.classList.toggle('active');
+        menuSidebar.classList.toggle('active');
+        menuOverlay.classList.toggle('active');
+    }
+    
+    menuBtn.addEventListener('click', toggleMenu);
+    menuOverlay.addEventListener('click', toggleMenu);
+    
+    // Destacar página atual
+    const currentPage = window.location.pathname.split('/').pop();
+    document.querySelectorAll('.menu-link').forEach(link => {
+        if (link.getAttribute('href') === currentPage) {
+            link.classList.add('active');
+        }
+    });
+    
+    // Fechar menu ao clicar em um link
+    document.querySelectorAll('.menu-link').forEach(link => {
+        link.addEventListener('click', function() {
+            setTimeout(toggleMenu, 200);
+        });
+    });
+})();
+</script>
+"""
+
+
+def inserir_menu_em_html(html_content: str, menu_html: str) -> str:
+    body_pos = html_content.find('<body>')
+    if body_pos != -1:
+        body_end = html_content.find('>', body_pos) + 1
+        return html_content[:body_end] + '\n' + menu_html + html_content[body_end:]
+    return html_content
 
 
 def normalizar_nome(name: str) -> str:
@@ -133,7 +331,6 @@ def carregar_voos(csv_path: Path) -> Tuple[Dict[str, Dict[str, float]], Set[str]
 
 
 def gerar_caminho_html(base_path: Path):
-    print("\n=== Gerando visualização: Árvore de Percurso ===")
     csv_path = base_path / 'data' / 'adjacencias_bairros.csv'
     out_html = base_path / 'out' / 'arvore_percurso.html'
 
@@ -143,16 +340,13 @@ def gerar_caminho_html(base_path: Path):
     try:
         adj = gerar_grafo_adjacencias(csv_path)
     except Exception as e:
-        print(f"Erro ao carregar grafo: {e}")
         return
 
     if origem not in adj or destino not in adj:
-        print(f"Origem ou destino não encontrados no grafo")
         return
 
     custo, caminho = dijkstra_wrapper(adj, origem, destino)
     if not caminho:
-        print("Nenhum caminho encontrado")
         return
 
     net = Network(height='800px', width='100%', directed=False)
@@ -170,12 +364,18 @@ def gerar_caminho_html(base_path: Path):
 
     net.toggle_physics(False)
     out_html.parent.mkdir(parents=True, exist_ok=True)
-    net.write_html(str(out_html), notebook=False)
-    print(f"✓ Arquivo criado: {out_html}")
+    
+    html_content = net.generate_html()
+    menu_html = criar_menu_navegacao()
+    html_final = inserir_menu_em_html(html_content, menu_html)
+    
+    with open(out_html, 'w', encoding='utf-8') as f:
+        f.write(html_final)
+    
+    print(f"Arquivo criado: {out_html}")
 
 
 def gerar_grafo_interativo_bairros(base_path: Path):
-    print("\n=== Gerando visualização: Grafo Interativo de Bairros ===")
     csv_adj = base_path / 'data' / 'adjacencias_bairros.csv'
     csv_bairros = base_path / 'data' / 'bairros_recife.csv'
     out_html = base_path / 'out' / 'grafo_interativo.html'
@@ -303,14 +503,17 @@ function highlightPath(){{
         insert_at_end = html.find('\n', insert_at) + 1
         html = html[:insert_at_end] + controls_html + html[insert_at_end:]
 
+    menu_html = criar_menu_navegacao()
+    html = inserir_menu_em_html(html, menu_html)
+
     out_html.parent.mkdir(parents=True, exist_ok=True)
     with open(out_html, 'w', encoding='utf-8') as f:
         f.write(html)
-    print(f"✓ Arquivo criado: {out_html}")
+    
+    print(f"Arquivo criado: {out_html}")
 
 
 def gerar_grafo_voos_interativo(base_path: Path):
-    print("\n=== Gerando visualização: Grafo Interativo de Voos ===")
     csv_voos = base_path / 'data' / 'dataset_parte2' / 'voos_brasil.csv'
     out_html = base_path / 'out' / 'grafo_voos_interativo.html'
     
@@ -322,13 +525,8 @@ def gerar_grafo_voos_interativo(base_path: Path):
         for destino in destinos:
             grau_entrada[destino] += 1
     
-    hub = None
-    for v in vertices:
-        if 'Miami' in v:
-            hub = v
-            break
-    
-    cores_pais = {'Estados Unidos': '#F44336', 'Brasil': '#2196F3'}
+    tamanho_fixo = 25
+    cores_pais = {'Estados Unidos': '#FF6B6B', 'Brasil': '#4ECDC4'}
     
     net = Network(height='800px', width='100%', bgcolor='#ffffff', font_color='black',
                   notebook=False, directed=True)
@@ -336,27 +534,22 @@ def gerar_grafo_voos_interativo(base_path: Path):
     for node in sorted(vertices):
         pais = 'Estados Unidos' if 'Miami' in node else 'Brasil'
         grau_total = grau_saida[node] + grau_entrada[node]
-        tamanho = 20 + grau_total * 5
         node_color = cores_pais.get(pais, '#97C2FC')
         nome_curto = node.split(',')[0] if ',' in node else node
         nome_curto = nome_curto.replace(' - ', '\n')
-        title = (f'{node} / País: {pais} / Grau Total: {grau_total} / '
-                f'Grau Entrada: {grau_entrada[node]} / Grau Saída: {grau_saida[node]}')
+        title = (f'{node}\nPaís: {pais}\n'
+                f'Grau Total: {grau_total}\n'
+                f'Grau Entrada: {grau_entrada[node]}\n'
+                f'Grau Saída: {grau_saida[node]}')
         net.add_node(node, label=nome_curto, title=title, color=node_color,
-                    size=tamanho, font={'size': 14, 'color': 'black', 'bold': True})
+                    size=tamanho_fixo, font={'size': 12, 'color': 'black'})
     
     for origem, destinos in adj.items():
         for destino, peso in destinos.items():
-            if hub and origem == hub:
-                edge_color = '#4CAF50'
-            elif hub and destino == hub:
-                edge_color = '#FF5722'
-            else:
-                edge_color = '#2196F3'
-            width = 2 + (peso / 10)
-            title_edge = f'{origem} → {destino} / Voos: {int(peso)}'
+            width = 1 + (peso / 5)
+            title_edge = f'{origem} → {destino}\nVoos: {int(peso)}'
             net.add_edge(origem, destino, value=peso, title=title_edge,
-                        color=edge_color, width=width, arrows='to')
+                        color='#95a5a6', width=width, arrows='to')
     
     net.set_options("""
     {
@@ -364,44 +557,53 @@ def gerar_grafo_voos_interativo(base_path: Path):
             "enabled": true,
             "solver": "barnesHut",
             "barnesHut": {
-                "gravitationalConstant": -8000,
-                "centralGravity": 0.3,
-                "springLength": 250,
-                "springConstant": 0.04,
-                "damping": 0.09,
-                "avoidOverlap": 0.1
+                "gravitationalConstant": -15000,
+                "centralGravity": 0.1,
+                "springLength": 400,
+                "springConstant": 0.02,
+                "damping": 0.15,
+                "avoidOverlap": 0.5
             },
             "stabilization": {"enabled": true, "iterations": 2000, "updateInterval": 25}
         },
-        "nodes": {"font": {"size": 16, "face": "arial", "bold": true}, "borderWidth": 2, "shadow": true},
-        "edges": {"smooth": {"enabled": true, "type": "dynamic"}, "shadow": true}
+        "nodes": {"font": {"size": 14, "face": "arial"}, "borderWidth": 2, "shadow": true},
+        "edges": {"smooth": {"enabled": true, "type": "continuous"}, "shadow": false}
     }
     """)
     
     html = net.generate_html()
     num_vertices = len(vertices)
-    num_arestas = sum(len(destinos) for destinos in adj.items())
+    num_arestas = sum(len(destinos) for destinos in adj.values())
     total_voos = sum(sum(destinos.values()) for destinos in adj.values())
     
     legenda_html = f"""
 <div style="position:fixed;top:10px;left:10px;z-index:999;background:rgba(255,255,255,0.95);padding:15px;border-radius:8px;border:2px solid #ddd;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
-    <h3 style="margin:0 0 10px 0;color:#333;font-size:16px;">Rede de Voos Brasil</h3>
-    <div style="border-top:1px solid #ddd;padding-top:10px;font-size:11px;">
-        <div style="display:flex;align-items:center;margin:4px 0;">
-            <span style="width:18px;height:18px;background:#F44336;border-radius:50%;margin-right:10px;"></span>
-            <span>Hub (Miami)</span>
+    <h3 style="margin:0 0 10px 0;color:#333;font-size:16px;">Rede de Voos - Aeroportos</h3>
+    <div style="border-top:1px solid #ddd;padding-top:10px;font-size:12px;">
+        <div style="margin:6px 0;">
+            <strong>Estatísticas:</strong>
         </div>
-        <div style="display:flex;align-items:center;margin:4px 0;">
-            <span style="width:18px;height:18px;background:#2196F3;border-radius:50%;margin-right:10px;"></span>
-            <span>Aeroportos BR</span>
+        <div style="margin:4px 0;">
+            • Aeroportos: {num_vertices}
         </div>
-        <div style="display:flex;align-items:center;margin:4px 0;">
-            <span style="width:35px;height:4px;background:#4CAF50;margin-right:10px;"></span>
-            <span>Saída do Hub</span>
+        <div style="margin:4px 0;">
+            • Rotas: {num_arestas}
         </div>
-        <div style="display:flex;align-items:center;margin:4px 0;">
-            <span style="width:35px;height:4px;background:#FF5722;margin-right:10px;"></span>
-            <span>Entrada no Hub</span>
+        <div style="margin:4px 0;">
+            • Total de Voos: {int(total_voos)}
+        </div>
+        <div style="margin-top:10px;padding-top:10px;border-top:1px solid #ddd;">
+            <div style="display:flex;align-items:center;margin:4px 0;">
+                <span style="width:20px;height:20px;background:#FF6B6B;border-radius:50%;margin-right:10px;border:2px solid #333;"></span>
+                <span>Miami (EUA)</span>
+            </div>
+            <div style="display:flex;align-items:center;margin:4px 0;">
+                <span style="width:20px;height:20px;background:#4ECDC4;border-radius:50%;margin-right:10px;border:2px solid #333;"></span>
+                <span>Aeroportos Brasil</span>
+            </div>
+        </div>
+        <div style="margin-top:10px;font-size:10px;color:#666;">
+            * Largura da aresta = quantidade de voos
         </div>
     </div>
 </div>
@@ -412,14 +614,17 @@ def gerar_grafo_voos_interativo(base_path: Path):
         insert_at_end = html.find('\n', insert_at) + 1
         html = html[:insert_at_end] + legenda_html + html[insert_at_end:]
     
+    menu_html = criar_menu_navegacao()
+    html = inserir_menu_em_html(html, menu_html)
+    
     out_html.parent.mkdir(parents=True, exist_ok=True)
     with open(out_html, 'w', encoding='utf-8') as f:
         f.write(html)
-    print(f"✓ Arquivo criado: {out_html}")
+    
+    print(f"Arquivo criado: {out_html}")
 
 
 def gerar_visualizacoes_graficos(base_path: Path):
-    print("\n=== Gerando visualizações: Gráficos e Análises ===")
     csv_adj = base_path / 'data' / 'adjacencias_bairros.csv'
     csv_bairros = base_path / 'data' / 'bairros_recife.csv'
     out_dir = base_path / 'out'
@@ -441,7 +646,6 @@ def gerar_visualizacoes_graficos(base_path: Path):
         plt.tight_layout()
         plt.savefig(out_dir / 'grau_bairro_histograma.png')
         plt.close()
-        print(f"✓ Arquivo criado: {out_dir / 'grau_bairro_histograma.png'}")
 
     micror = {}
     with open(csv_bairros, 'r', encoding='utf-8') as f:
@@ -502,7 +706,6 @@ def gerar_visualizacoes_graficos(base_path: Path):
         plt.tight_layout()
         plt.savefig(out_dir / 'microrregioes_distancia_heatmap.png')
         plt.close()
-        print(f"✓ Arquivo criado: {out_dir / 'microrregioes_distancia_heatmap.png'}")
 
     micror_data = []
     for nome, bairros in micror.items():
@@ -526,34 +729,16 @@ def gerar_visualizacoes_graficos(base_path: Path):
         plt.tight_layout()
         plt.savefig(out_dir / 'piechart_microrregioes.png')
         plt.close()
-        print(f"✓ Arquivo criado: {out_dir / 'piechart_microrregioes.png'}")
 
 
 def main():
     base_path = Path(__file__).parent.parent
     
-    print("="*70)
-    print(" GERADOR DE VISUALIZAÇÕES - PROJETO GRAFOS")
-    print("="*70)
-    
+    gerar_grafo_bairros(base_path)
     gerar_caminho_html(base_path)
     gerar_grafo_interativo_bairros(base_path)
     gerar_grafo_voos_interativo(base_path)
     gerar_visualizacoes_graficos(base_path)
-    
-    print("\n" + "="*70)
-    print("✅ TODAS AS VISUALIZAÇÕES FORAM GERADAS COM SUCESSO!")
-    print("="*70)
-    print(f"\nArquivos salvos em: {base_path / 'out'}")
-    print("\nVisualizações HTML:")
-    print("  • arvore_percurso.html")
-    print("  • grafo_interativo.html")
-    print("  • grafo_voos_interativo.html")
-    print("\nVisualizações PNG:")
-    print("  • grau_bairro_histograma.png")
-    print("  • microrregioes_distancia_heatmap.png")
-    print("  • piechart_microrregioes.png")
-    print()
 
 
 if __name__ == '__main__':
