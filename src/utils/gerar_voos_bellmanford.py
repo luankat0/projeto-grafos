@@ -35,7 +35,6 @@ def main():
     conexoes = []
     conexoes_geradas = set()
     
-    # Criar um caminho principal conectando todos os aeroportos em sequência
     for i in range(len(aeroportos_lista) - 1):
         origem = aeroportos_lista[i]
         destino = aeroportos_lista[i + 1]
@@ -50,14 +49,11 @@ def main():
                 'pais_destino': aeroportos_info[destino]
             })
     
-    # Adicionar algumas conexões extras para criar rotas alternativas
-    # Mas limitadas para manter o grafo esparso
     num_conexoes_extras = len(aeroportos_lista) // 3
     
     for _ in range(num_conexoes_extras):
         origem = random.choice(aeroportos_lista)
         
-        # Escolher destino que não seja muito próximo na lista
         idx_origem = aeroportos_lista.index(origem)
         opcoes_destino = [a for i, a in enumerate(aeroportos_lista) 
                          if abs(i - idx_origem) > 2 and a != origem]
@@ -75,8 +71,6 @@ def main():
                     'pais_destino': aeroportos_info[destino]
                 })
     
-    # Definir quais conexões terão pesos negativos
-    # Cerca de 20% das conexões terão peso negativo
     num_negativas = max(3, len(conexoes) // 5)
     indices_negativos = random.sample(range(len(conexoes)), min(num_negativas, len(conexoes)))
     
