@@ -1,6 +1,7 @@
 import csv
 import json
 import time
+import tracemalloc
 from pathlib import Path
 from collections import defaultdict
 from datetime import datetime
@@ -180,11 +181,14 @@ def run_analysis():
     bfs_sources = [airport for airport, _ in top_airports[:3]]
     
     for source in bfs_sources:
+        tracemalloc.start()
         start_time = time.perf_counter()
         
         result = bfs(unweighted_graph, source)
         
         end_time = time.perf_counter()
+        current, peak = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
         elapsed = (end_time - start_time) * 1000
         
         cidade = airports[source]['cidade']
@@ -194,18 +198,22 @@ def run_analysis():
             'cidade': cidade,
             'nodes_reached': len(result['order']),
             'layers': len(result['layers']),
-            'time_ms': round(elapsed, 3)
+            'time_ms': round(elapsed, 3),
+            'memory_kb': round(peak / 1024, 2)
         }
     
     
     dfs_sources = [airport for airport, _ in top_airports[2:5]]
     
     for source in dfs_sources:
+        tracemalloc.start()
         start_time = time.perf_counter()
         
         result = dfs(unweighted_graph, source)
         
         end_time = time.perf_counter()
+        current, peak = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
         elapsed = (end_time - start_time) * 1000
         
         cidade = airports[source]['cidade']
@@ -215,7 +223,8 @@ def run_analysis():
             'cidade': cidade,
             'nodes_reached': len(result['order']),
             'has_cycle': result['has_cycle'],
-            'time_ms': round(elapsed, 3)
+            'time_ms': round(elapsed, 3),
+            'memory_kb': round(peak / 1024, 2)
         }
     
 
@@ -233,11 +242,14 @@ def run_analysis():
         dijkstra_pairs.append((top_5_airports[3], top_5_airports[2]))
     
     for source, target in dijkstra_pairs[:5]:
+        tracemalloc.start()
         start_time = time.perf_counter()
         
         result = dijkstra(weighted_graph, source, target)
         
         end_time = time.perf_counter()
+        current, peak = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
         elapsed = (end_time - start_time) * 1000
         
         cidade_orig = airports[source]['cidade']
@@ -254,7 +266,8 @@ def run_analysis():
             'destino': f"{target} ({cidade_dest})",
             'cost': round(result['cost'], 2),
             'path_length': len(result['path_to_end']) if result['path_to_end'] else 0,
-            'time_ms': round(elapsed, 3)
+            'time_ms': round(elapsed, 3),
+            'memory_kb': round(peak / 1024, 2)
         }
 
     weighted_graph_neg = {k: v.copy() for k, v in weighted_graph.items()}
@@ -273,18 +286,22 @@ def run_analysis():
     source = top_5_airports[0]
     all_nodes = set(weighted_graph_neg.keys())
     
+    tracemalloc.start()
     start_time = time.perf_counter()
     
     result_neg = bellman_ford(weighted_graph_neg, source, all_nodes)
     
     end_time = time.perf_counter()
+    current, peak = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
     elapsed = (end_time - start_time) * 1000
 
     report['algorithms']['bellman_ford_negative_weights'] = {
         'source': f"{source} ({airports[source]['cidade']})",
         'negative_edges': edges_negativas,
         'has_negative_cycle': result_neg['has_negative_cycle'],
-        'time_ms': round(elapsed, 3)
+        'time_ms': round(elapsed, 3),
+        'memory_kb': round(peak / 1024, 2)
     }
     
     weighted_graph_cycle = {k: v.copy() for k, v in weighted_graph.items()}
@@ -305,11 +322,14 @@ def run_analysis():
         
         all_nodes_cycle = set(weighted_graph_cycle.keys())
         
+        tracemalloc.start()
         start_time = time.perf_counter()
         
         result_cycle = bellman_ford(weighted_graph_cycle, a1, all_nodes_cycle)
         
         end_time = time.perf_counter()
+        current, peak = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
         elapsed = (end_time - start_time) * 1000
         
         report['algorithms']['bellman_ford_negative_cycle'] = {
@@ -317,7 +337,8 @@ def run_analysis():
             'weights': "2.0 + 2.0 + (-8.0) = -4.0",
             'has_negative_cycle': result_cycle['has_negative_cycle'],
             'negative_cycle': result_cycle['negative_cycle'],
-            'time_ms': round(elapsed, 3)
+            'time_ms': round(elapsed, 3),
+            'memory_kb': round(peak / 1024, 2)
         }
     
     report_path = out_path / 'parte2_report.json'

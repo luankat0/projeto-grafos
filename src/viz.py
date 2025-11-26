@@ -8,7 +8,7 @@ from typing import Dict, List, Set, Tuple
 import sys
 
 sys.path.insert(0, str(Path(__file__).parent))
-from graphs.algorithms import dijkstra as dijkstra_base
+from graphs.algorithms import dijkstra as dijkstra_base, bellman_ford
 from graphs.io import gerar_grafo_bairros
 
 from pyvis.network import Network
@@ -166,6 +166,10 @@ def criar_menu_navegacao():
         <a href="grafo_voos_interativo.html" class="menu-link">
             <span class="icon">✈️</span>
             <span>Grafo de Voos</span>
+        </a>
+        <a href="caminho_bellmanford.html" class="menu-link">
+            <span class="icon">🔄</span>
+            <span>Caminho Bellman-Ford</span>
         </a>
     </div>
 </nav>
@@ -731,6 +735,240 @@ def gerar_visualizacoes_graficos(base_path: Path):
         plt.close()
 
 
+def gerar_grafico_voos_por_cidade(base_path: Path):
+    csv_voos = base_path / 'data' / 'dataset_parte2' / 'voos_brasil.csv'
+    out_dir = base_path / 'out'
+    out_dir.mkdir(parents=True, exist_ok=True)
+    
+    contagem_voos = {}
+    
+    with open(csv_voos, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            cidade_origem = row.get('Cidade.Origem', '').strip()
+            cidade_destino = row.get('Cidade.Destino', '').strip()
+            
+            if cidade_origem:
+                contagem_voos[cidade_origem] = contagem_voos.get(cidade_origem, 0) + 1
+            if cidade_destino:
+                contagem_voos[cidade_destino] = contagem_voos.get(cidade_destino, 0) + 1
+    
+    cidades_ordenadas = sorted(contagem_voos.items(), key=lambda x: x[1], reverse=True)
+    cidades = [c[0] for c in cidades_ordenadas]
+    voos = [c[1] for c in cidades_ordenadas]
+    
+    plt.figure(figsize=(14, 8))
+    plt.bar(range(len(cidades)), voos, color='#4ECDC4', edgecolor='black')
+    plt.xlabel('Cidade', fontsize=12)
+    plt.ylabel('Quantidade de Voos', fontsize=12)
+    plt.title('Quantidade de Voos por Cidade', fontsize=14, fontweight='bold')
+    plt.xticks(range(len(cidades)), cidades, rotation=90, ha='right', fontsize=9)
+    plt.grid(axis='y', alpha=0.3)
+    plt.tight_layout()
+    plt.savefig(out_dir / 'voos_por_cidade.png', dpi=150)
+    plt.close()
+    
+    print(f"Arquivo criado: {out_dir / 'voos_por_cidade.png'}")
+
+
+def gerar_caminho_bellmanford_html(base_path: Path):
+    csv_bellmanford = base_path / 'data' / 'dataset_parte2' / 'voos_bellmanford.csv'
+    out_html = base_path / 'out' / 'caminho_bellmanford.html'
+    
+    grafo = {}
+    aeroportos = set()
+    info_aeroportos = {}
+    arestas_negativas = []
+    
+    with open(csv_bellmanford, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            origem = row.get('aeroporto_origem', '').strip()
+            destino = row.get('aeroporto_destino', '').strip()
+            pais_origem = row.get('pais_origem', '').strip()
+            pais_destino = row.get('pais_destino', '').strip()
+            voos = float(row.get('voos', 0))
+            
+            if origem and destino:
+                aeroportos.add(origem)
+                aeroportos.add(destino)
+                info_aeroportos[origem] = pais_origem
+                info_aeroportos[destino] = pais_destino
+                
+                grafo.setdefault(origem, {})[destino] = voos
+                
+                if voos < 0:
+                    arestas_negativas.append((origem, destino, voos))
+    
+    if not grafo or len(aeroportos) < 2:
+        print("Grafo insuficiente para Bellman-Ford")
+        return
+    
+    aeroportos_lista = sorted(list(aeroportos))
+    origem = aeroportos_lista[0]
+    
+    resultado = bellman_ford(grafo, origem, aeroportos)
+    
+    if resultado['has_negative_cycle']:
+        print(f"⚠️  Ciclo negativo detectado no grafo!")
+        if resultado['negative_cycle']:
+            caminho = resultado['negative_cycle']
+            titulo = f"Ciclo Negativo Detectado"
+        else:
+            caminho = [origem]
+            titulo = "Ciclo Negativo (caminho não recuperável)"
+    else:
+        distancias = resultado['distances']
+        aeroportos_alcancaveis = [a for a in aeroportos_lista if distancias[a] != float('inf')]
+        
+        if len(aeroportos_alcancaveis) > 1:
+            destino = max(aeroportos_alcancaveis, key=lambda a: abs(distancias[a]))
+            
+            parents = {}
+            for node in aeroportos:
+                parents[node] = None
+            
+            distances_calc = {node: float('inf') for node in aeroportos}
+            distances_calc[origem] = 0.0
+            
+            for _ in range(len(aeroportos) - 1):
+                for node in grafo:
+                    if distances_calc[node] == float('inf'):
+                        continue
+                    for neighbor, weight in grafo.get(node, {}).items():
+                        if distances_calc[node] + weight < distances_calc[neighbor]:
+                            distances_calc[neighbor] = distances_calc[node] + weight
+                            parents[neighbor] = node
+            
+            caminho = []
+            current = destino
+            visited = set()
+            while current is not None and current not in visited:
+                caminho.append(current)
+                visited.add(current)
+                current = parents.get(current)
+            caminho.reverse()
+            
+            if not caminho or caminho[0] != origem:
+                caminho = [origem, destino] if destino in grafo.get(origem, {}) else [origem]
+            
+            custo_total = distances_calc.get(destino, 0)
+            titulo = f"Bellman-Ford: {origem.split(' - ')[0]} → {destino.split(' - ')[0]} (Custo: {custo_total:.1f})"
+        else:
+            caminho = [origem]
+            titulo = f"Bellman-Ford: Apenas origem alcançável"
+    
+    net = Network(height='800px', width='100%', directed=True, bgcolor='#ffffff')
+    
+    for i, node in enumerate(caminho):
+        pais = info_aeroportos.get(node, 'Desconhecido')
+        nome_curto = node.split(' - ')[0]
+        
+        if i == 0:
+            color = '#2ecc71'
+            size = 35
+        elif i == len(caminho) - 1:
+            color = '#3498db'
+            size = 35
+        else:
+            color = '#95a5a6'
+            size = 25
+        
+        title = f'{node}\nPaís: {pais}'
+        net.add_node(node, label=nome_curto, color=color, size=size, 
+                    title=title, font={'size': 14, 'color': 'black'})
+    
+    for i in range(len(caminho) - 1):
+        origem_edge = caminho[i]
+        destino_edge = caminho[i + 1]
+        peso = grafo.get(origem_edge, {}).get(destino_edge, 0)
+        
+        if peso < 0:
+            cor_aresta = '#e74c3c'
+            width = 4
+        else:
+            cor_aresta = '#34495e'
+            width = 2
+        
+        net.add_edge(origem_edge, destino_edge, value=abs(peso), 
+                    title=f'Voos: {int(peso)}', color=cor_aresta, 
+                    arrows='to', width=width)
+    
+    net.toggle_physics(False)
+    out_html.parent.mkdir(parents=True, exist_ok=True)
+    
+    html_content = net.generate_html()
+    
+    num_arestas_negativas = len(arestas_negativas)
+    
+    legenda = f"""
+<div style="position:fixed;top:10px;left:10px;z-index:999;background:rgba(255,255,255,0.95);padding:15px;border-radius:8px;border:2px solid #ddd;box-shadow:0 4px 8px rgba(0,0,0,0.2);">
+    <h3 style="margin:0 0 10px 0;color:#333;font-size:16px;border-bottom:2px solid #ddd;padding-bottom:8px;">{titulo}</h3>
+    <div style="font-size:12px;">
+        <div style="margin:8px 0;">
+            <strong>Legenda dos Nós:</strong>
+        </div>
+        <div style="margin:5px 0;display:flex;align-items:center;">
+            <span style="display:inline-block;width:18px;height:18px;background:#2ecc71;border-radius:50%;margin-right:8px;border:2px solid #27ae60;"></span>
+            <span>Origem</span>
+        </div>
+        <div style="margin:5px 0;display:flex;align-items:center;">
+            <span style="display:inline-block;width:18px;height:18px;background:#3498db;border-radius:50%;margin-right:8px;border:2px solid #2980b9;"></span>
+            <span>Destino</span>
+        </div>
+        <div style="margin:5px 0;display:flex;align-items:center;">
+            <span style="display:inline-block;width:18px;height:18px;background:#95a5a6;border-radius:50%;margin-right:8px;border:2px solid #7f8c8d;"></span>
+            <span>Caminho intermediário</span>
+        </div>
+        <div style="margin-top:12px;padding-top:8px;border-top:1px solid #ddd;">
+            <strong>Legenda das Arestas:</strong>
+        </div>
+        <div style="margin:5px 0;display:flex;align-items:center;">
+            <span style="display:inline-block;width:30px;height:3px;background:#e74c3c;margin-right:8px;"></span>
+            <span>Peso negativo (voos negativos)</span>
+        </div>
+        <div style="margin:5px 0;display:flex;align-items:center;">
+            <span style="display:inline-block;width:30px;height:3px;background:#34495e;margin-right:8px;"></span>
+            <span>Peso positivo (voos normais)</span>
+        </div>
+        <div style="margin-top:12px;padding-top:8px;border-top:1px solid #ddd;">
+            <strong>Estatísticas:</strong>
+        </div>
+        <div style="margin:4px 0;font-size:11px;">
+            • Algoritmo: <strong>Bellman-Ford</strong>
+        </div>
+        <div style="margin:4px 0;font-size:11px;">
+            • Aeroportos no grafo: <strong>{len(aeroportos)}</strong>
+        </div>
+        <div style="margin:4px 0;font-size:11px;">
+            • Aeroportos no caminho: <strong>{len(caminho)}</strong>
+        </div>
+        <div style="margin:4px 0;font-size:11px;">
+            • Arestas negativas: <strong>{num_arestas_negativas}</strong>
+        </div>
+        <div style="margin:4px 0;font-size:11px;">
+            • Ciclo negativo: <strong>{'Sim' if resultado['has_negative_cycle'] else 'Não'}</strong>
+        </div>
+    </div>
+</div>
+"""
+    
+    body_pos = html_content.find('<body>')
+    if body_pos != -1:
+        insert_at_end = html_content.find('\n', body_pos) + 1
+        html_content = html_content[:insert_at_end] + legenda + html_content[insert_at_end:]
+    
+    menu_html = criar_menu_navegacao()
+    html_final = inserir_menu_em_html(html_content, menu_html)
+    
+    with open(out_html, 'w', encoding='utf-8') as f:
+        f.write(html_final)
+    
+    print(f"Arquivo criado: {out_html}")
+    if resultado['has_negative_cycle']:
+        print(f"⚠️  AVISO: Ciclo negativo detectado no grafo!")
+
+
 def main():
     base_path = Path(__file__).parent.parent
     
@@ -739,6 +977,8 @@ def main():
     gerar_grafo_interativo_bairros(base_path)
     gerar_grafo_voos_interativo(base_path)
     gerar_visualizacoes_graficos(base_path)
+    gerar_grafico_voos_por_cidade(base_path)
+    gerar_caminho_bellmanford_html(base_path)
 
 
 if __name__ == '__main__':

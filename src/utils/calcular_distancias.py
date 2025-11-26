@@ -71,6 +71,7 @@ def main():
 
     for (bairro_x, bairro_y), (addr_x, addr_y) in zip(pares_especificos, enderecos):
         if bairro_x not in grafo or bairro_y not in grafo:
+            print(f"Um dos bairros não está no grafo: {bairro_x}, {bairro_y}")
             continue
 
         custo, caminho = dijkstra(grafo, bairro_x, bairro_y)

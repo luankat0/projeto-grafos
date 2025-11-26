@@ -1,5 +1,14 @@
 import csv
 from pathlib import Path
+import unicodedata
+
+
+def normalizar_texto(texto):
+    if not isinstance(texto, str):
+        return texto
+    texto_sem_acento = unicodedata.normalize('NFD', texto)
+    texto_sem_acento = ''.join(char for char in texto_sem_acento if unicodedata.category(char) != 'Mn')
+    return texto_sem_acento.strip()
 
 
 def atribuir_peso(logradouro):
@@ -45,6 +54,13 @@ def main():
             novo_peso = atribuir_peso(logradouro_atual)
             
             linha['peso'] = novo_peso
+            
+            if 'bairro_origem' in linha:
+                linha['bairro_origem'] = normalizar_texto(linha['bairro_origem'])
+            if 'bairro_destino' in linha:
+                linha['bairro_destino'] = normalizar_texto(linha['bairro_destino'])
+            if 'logradouro' in linha:
+                linha['logradouro'] = normalizar_texto(linha['logradouro'])
             
             linhas_atualizadas.append(linha)
 

@@ -1,4 +1,4 @@
-bairro_origem,bairro_destino,logradouro,observacao,peso
+bairro_origem,bairro_destino,logradouro,observação,peso
 Recife,Santo Antonio,Pte. Buarque de Macedo,,2
 Recife,Santo Amaro,Av. Norte Miguel Arraes de Alencar,,3
 Campo Grande,Santo Amaro,R. Odorico Mendes,,1
@@ -30,7 +30,7 @@ Santo Antonio,Sao Jose,Av. Martins de Barros,,3
 Coelhos,Sao Jose,Pte. 6 de Marco,,2
 Ilha Joana Bezerra,Sao Jose,R. Dom Paulo II,,1
 Afogados,Sao Jose,R. Imperial,,1
-Brasilia Teimosa,Sao Jose,Av. Brasilia Teimosa,"Avenida e separada dos bairros, ela fica no mar",3
+Brasilia Teimosa,Sao Jose,Av. Brasilia Teimosa,"Avenida é separada dos bairros, ela fica no mar",3
 Coelhos,Ilha Joana Bezerra,Pte. Viaduto Joaquim Cardoso,,2
 Ilha Joana Bezerra,Ilha do Retiro,R. Pref. Jorge Martins,,1
 Arruda,Peixinhos,Av. Prof. Jose dos Anjos,,3

@@ -51,24 +51,223 @@
 
     <body>
 
+<style>
+.menu-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10001;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    border: none;
+    border-radius: 8px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+.menu-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+.menu-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+.menu-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+.menu-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+.menu-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+.menu-sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100vh;
+    background: linear-gradient(180deg, #2c3e50 0%, #1a252f 100%);
+    box-shadow: -4px 0 20px rgba(0,0,0,0.4);
+    z-index: 10000;
+    transition: right 0.4s ease;
+    overflow-y: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.menu-sidebar.active {
+    right: 0;
+}
+.menu-header {
+    padding: 30px 20px;
+    color: white;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+}
+.menu-header h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+.menu-header p {
+    margin: 8px 0 0 0;
+    font-size: 13px;
+    opacity: 0.9;
+}
+.menu-links {
+    padding: 20px 0;
+}
+.menu-link {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+    gap: 12px;
+    font-size: 15px;
+}
+.menu-link:hover {
+    background: rgba(255,255,255,0.2);
+    border-left-color: white;
+    padding-left: 30px;
+}
+.menu-link.active {
+    background: rgba(255,255,255,0.25);
+    border-left-color: white;
+    font-weight: bold;
+}
+.menu-link .icon {
+    font-size: 20px;
+    width: 24px;
+    text-align: center;
+}
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+</style>
+
+<button class="menu-btn" id="menuBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<nav class="menu-sidebar" id="menuSidebar">
+    <div class="menu-header">
+        <h2>📊 Projeto Grafos</h2>
+        <p>Visualizações Interativas</p>
+    </div>
+    <div class="menu-links">
+        <a href="grafo_bairros.html" class="menu-link">
+            <span class="icon">🗺️</span>
+            <span>Grafo de Bairros</span>
+        </a>
+        <a href="arvore_percurso.html" class="menu-link">
+            <span class="icon">🌳</span>
+            <span>Árvore de Percurso</span>
+        </a>
+        <a href="grafo_interativo.html" class="menu-link">
+            <span class="icon">🏘️</span>
+            <span>Grafo Interativo Bairros</span>
+        </a>
+        <a href="grafo_voos_interativo.html" class="menu-link">
+            <span class="icon">✈️</span>
+            <span>Grafo de Voos</span>
+        </a>
+        <a href="caminho_bellmanford.html" class="menu-link">
+            <span class="icon">🔄</span>
+            <span>Caminho Bellman-Ford</span>
+        </a>
+    </div>
+</nav>
+
+<script>
+(function() {
+    const menuBtn = document.getElementById('menuBtn');
+    const menuSidebar = document.getElementById('menuSidebar');
+    const menuOverlay = document.getElementById('menuOverlay');
+    
+    function toggleMenu() {
+        menuBtn.classList.toggle('active');
+        menuSidebar.classList.toggle('active');
+        menuOverlay.classList.toggle('active');
+    }
+    
+    menuBtn.addEventListener('click', toggleMenu);
+    menuOverlay.addEventListener('click', toggleMenu);
+    
+    // Destacar página atual
+    const currentPage = window.location.pathname.split('/').pop();
+    document.querySelectorAll('.menu-link').forEach(link => {
+        if (link.getAttribute('href') === currentPage) {
+            link.classList.add('active');
+        }
+    });
+    
+    // Fechar menu ao clicar em um link
+    document.querySelectorAll('.menu-link').forEach(link => {
+        link.addEventListener('click', function() {
+            setTimeout(toggleMenu, 200);
+        });
+    });
+})();
+</script>
+
+
 <div style="position:fixed;top:10px;left:10px;z-index:999;background:rgba(255,255,255,0.95);padding:15px;border-radius:8px;border:2px solid #ddd;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
-    <h3 style="margin:0 0 10px 0;color:#333;font-size:16px;">Rede de Voos Brasil</h3>
-    <div style="border-top:1px solid #ddd;padding-top:10px;font-size:11px;">
-        <div style="display:flex;align-items:center;margin:4px 0;">
-            <span style="width:18px;height:18px;background:#F44336;border-radius:50%;margin-right:10px;"></span>
-            <span>Hub (Miami)</span>
+    <h3 style="margin:0 0 10px 0;color:#333;font-size:16px;">Rede de Voos - Aeroportos</h3>
+    <div style="border-top:1px solid #ddd;padding-top:10px;font-size:12px;">
+        <div style="margin:6px 0;">
+            <strong>Estatísticas:</strong>
         </div>
-        <div style="display:flex;align-items:center;margin:4px 0;">
-            <span style="width:18px;height:18px;background:#2196F3;border-radius:50%;margin-right:10px;"></span>
-            <span>Aeroportos BR</span>
+        <div style="margin:4px 0;">
+            • Aeroportos: 20
         </div>
-        <div style="display:flex;align-items:center;margin:4px 0;">
-            <span style="width:35px;height:4px;background:#4CAF50;margin-right:10px;"></span>
-            <span>Saída do Hub</span>
+        <div style="margin:4px 0;">
+            • Rotas: 59
         </div>
-        <div style="display:flex;align-items:center;margin:4px 0;">
-            <span style="width:35px;height:4px;background:#FF5722;margin-right:10px;"></span>
-            <span>Entrada no Hub</span>
+        <div style="margin:4px 0;">
+            • Total de Voos: 2000
+        </div>
+        <div style="margin-top:10px;padding-top:10px;border-top:1px solid #ddd;">
+            <div style="display:flex;align-items:center;margin:4px 0;">
+                <span style="width:20px;height:20px;background:#FF6B6B;border-radius:50%;margin-right:10px;border:2px solid #333;"></span>
+                <span>Miami (EUA)</span>
+            </div>
+            <div style="display:flex;align-items:center;margin:4px 0;">
+                <span style="width:20px;height:20px;background:#4ECDC4;border-radius:50%;margin-right:10px;border:2px solid #333;"></span>
+                <span>Aeroportos Brasil</span>
+            </div>
+        </div>
+        <div style="margin-top:10px;font-size:10px;color:#666;">
+            * Largura da aresta = quantidade de voos
         </div>
     </div>
 </div>
@@ -110,8 +309,8 @@
                   
 
                   // parsing and collecting nodes and edges from the python
-                  nodes = new vis.DataSet([{"color": "#2196F3", "font": {"color": "black"}, "id": "Afonso Pena", "label": "Afonso Pena", "shape": "dot", "size": 30, "title": "Afonso Pena / Pa\u00eds: Brasil / Grau Total: 2 / Grau Entrada: 1 / Grau Sa\u00edda: 1"}, {"color": "#2196F3", "font": {"color": "black"}, "id": "Deputado Luis Eduardo Magalhaes", "label": "Deputado Luis Eduardo Magalhaes", "shape": "dot", "size": 30, "title": "Deputado Luis Eduardo Magalhaes / Pa\u00eds: Brasil / Grau Total: 2 / Grau Entrada: 1 / Grau Sa\u00edda: 1"}, {"color": "#2196F3", "font": {"color": "black"}, "id": "Guararapes - Gilberto Freyre", "label": "Guararapes\nGilberto Freyre", "shape": "dot", "size": 30, "title": "Guararapes - Gilberto Freyre / Pa\u00eds: Brasil / Grau Total: 2 / Grau Entrada: 1 / Grau Sa\u00edda: 1"}, {"color": "#2196F3", "font": {"color": "black"}, "id": "Guarulhos - Governador Andre Franco Montoro", "label": "Guarulhos\nGovernador Andre Franco Montoro", "shape": "dot", "size": 30, "title": "Guarulhos - Governador Andre Franco Montoro / Pa\u00eds: Brasil / Grau Total: 2 / Grau Entrada: 1 / Grau Sa\u00edda: 1"}, {"color": "#F44336", "font": {"color": "black"}, "id": "Miami", "label": "Miami", "shape": "dot", "size": 70, "title": "Miami / Pa\u00eds: Estados Unidos / Grau Total: 10 / Grau Entrada: 5 / Grau Sa\u00edda: 5"}, {"color": "#2196F3", "font": {"color": "black"}, "id": "Presidente Juscelino Kubitschek", "label": "Presidente Juscelino Kubitschek", "shape": "dot", "size": 30, "title": "Presidente Juscelino Kubitschek / Pa\u00eds: Brasil / Grau Total: 2 / Grau Entrada: 1 / Grau Sa\u00edda: 1"}, {"color": "#2196F3", "font": {"color": "black"}, "id": "Salgado Filho", "label": "Salgado Filho", "shape": "dot", "size": 30, "title": "Salgado Filho / Pa\u00eds: Brasil / Grau Total: 2 / Grau Entrada: 1 / Grau Sa\u00edda: 1"}]);
-                  edges = new vis.DataSet([{"arrows": "to", "color": "#2196F3", "from": "Afonso Pena", "title": "Afonso Pena \u2192 Salgado Filho / Voos: 31", "to": "Salgado Filho", "value": 31.0, "width": 5.1}, {"arrows": "to", "color": "#FF5722", "from": "Salgado Filho", "title": "Salgado Filho \u2192 Miami / Voos: 31", "to": "Miami", "value": 31.0, "width": 5.1}, {"arrows": "to", "color": "#4CAF50", "from": "Miami", "title": "Miami \u2192 Afonso Pena / Voos: 31", "to": "Afonso Pena", "value": 31.0, "width": 5.1}, {"arrows": "to", "color": "#4CAF50", "from": "Miami", "title": "Miami \u2192 Presidente Juscelino Kubitschek / Voos: 31", "to": "Presidente Juscelino Kubitschek", "value": 31.0, "width": 5.1}, {"arrows": "to", "color": "#4CAF50", "from": "Miami", "title": "Miami \u2192 Deputado Luis Eduardo Magalhaes / Voos: 17", "to": "Deputado Luis Eduardo Magalhaes", "value": 17.0, "width": 3.7}, {"arrows": "to", "color": "#4CAF50", "from": "Miami", "title": "Miami \u2192 Guarulhos - Governador Andre Franco Montoro / Voos: 26", "to": "Guarulhos - Governador Andre Franco Montoro", "value": 26.0, "width": 4.6}, {"arrows": "to", "color": "#4CAF50", "from": "Miami", "title": "Miami \u2192 Guararapes - Gilberto Freyre / Voos: 27", "to": "Guararapes - Gilberto Freyre", "value": 27.0, "width": 4.7}, {"arrows": "to", "color": "#FF5722", "from": "Presidente Juscelino Kubitschek", "title": "Presidente Juscelino Kubitschek \u2192 Miami / Voos: 31", "to": "Miami", "value": 31.0, "width": 5.1}, {"arrows": "to", "color": "#FF5722", "from": "Deputado Luis Eduardo Magalhaes", "title": "Deputado Luis Eduardo Magalhaes \u2192 Miami / Voos: 17", "to": "Miami", "value": 17.0, "width": 3.7}, {"arrows": "to", "color": "#FF5722", "from": "Guarulhos - Governador Andre Franco Montoro", "title": "Guarulhos - Governador Andre Franco Montoro \u2192 Miami / Voos: 31", "to": "Miami", "value": 31.0, "width": 5.1}, {"arrows": "to", "color": "#FF5722", "from": "Guararapes - Gilberto Freyre", "title": "Guararapes - Gilberto Freyre \u2192 Miami / Voos: 26", "to": "Miami", "value": 26.0, "width": 4.6}]);
+                  nodes = new vis.DataSet([{"color": "#4ECDC4", "font": {"color": "black"}, "id": "Aeroporto Internacional Do Rio De Janeiro/Galeao", "label": "Aeroporto Internacional Do Rio De Janeiro/Galeao", "shape": "dot", "size": 25, "title": "Aeroporto Internacional Do Rio De Janeiro/Galeao\nPa\u00eds: Brasil\nGrau Total: 12\nGrau Entrada: 6\nGrau Sa\u00edda: 6"}, {"color": "#4ECDC4", "font": {"color": "black"}, "id": "Afonso Pena", "label": "Afonso Pena", "shape": "dot", "size": 25, "title": "Afonso Pena\nPa\u00eds: Brasil\nGrau Total: 2\nGrau Entrada: 1\nGrau Sa\u00edda: 1"}, {"color": "#4ECDC4", "font": {"color": "black"}, "id": "Bogota", "label": "Bogota", "shape": "dot", "size": 25, "title": "Bogota\nPa\u00eds: Brasil\nGrau Total: 2\nGrau Entrada: 1\nGrau Sa\u00edda: 1"}, {"color": "#4ECDC4", "font": {"color": "black"}, "id": "Buenos Aires", "label": "Buenos Aires", "shape": "dot", "size": 25, "title": "Buenos Aires\nPa\u00eds: Brasil\nGrau Total: 10\nGrau Entrada: 5\nGrau Sa\u00edda: 5"}, {"color": "#4ECDC4", "font": {"color": "black"}, "id": "Buenos Aires/Aeroparque", "label": "Buenos Aires/Aeroparque", "shape": "dot", "size": 25, "title": "Buenos Aires/Aeroparque\nPa\u00eds: Brasil\nGrau Total: 10\nGrau Entrada: 5\nGrau Sa\u00edda: 5"}, {"color": "#4ECDC4", "font": {"color": "black"}, "id": "Deputado Luis Eduardo Magalhaes", "label": "Deputado Luis Eduardo Magalhaes", "shape": "dot", "size": 25, "title": "Deputado Luis Eduardo Magalhaes\nPa\u00eds: Brasil\nGrau Total: 6\nGrau Entrada: 3\nGrau Sa\u00edda: 3"}, {"color": "#4ECDC4", "font": {"color": "black"}, "id": "Eduardo Gomes", "label": "Eduardo Gomes", "shape": "dot", "size": 25, "title": "Eduardo Gomes\nPa\u00eds: Brasil\nGrau Total: 2\nGrau Entrada: 1\nGrau Sa\u00edda: 1"}, {"color": "#4ECDC4", "font": {"color": "black"}, "id": "Guararapes - Gilberto Freyre", "label": "Guararapes\nGilberto Freyre", "shape": "dot", "size": 25, "title": "Guararapes - Gilberto Freyre\nPa\u00eds: Brasil\nGrau Total: 2\nGrau Entrada: 1\nGrau Sa\u00edda: 1"}, {"color": "#4ECDC4", "font": {"color": "black"}, "id": "Guarulhos - Governador Andre Franco Montoro", "label": "Guarulhos\nGovernador Andre Franco Montoro", "shape": "dot", "size": 25, "title": "Guarulhos - Governador Andre Franco Montoro\nPa\u00eds: Brasil\nGrau Total: 14\nGrau Entrada: 7\nGrau Sa\u00edda: 7"}, {"color": "#4ECDC4", "font": {"color": "black"}, "id": "Hercilio Luz", "label": "Hercilio Luz", "shape": "dot", "size": 25, "title": "Hercilio Luz\nPa\u00eds: Brasil\nGrau Total: 4\nGrau Entrada: 2\nGrau Sa\u00edda: 2"}, {"color": "#4ECDC4", "font": {"color": "black"}, "id": "Madrid", "label": "Madrid", "shape": "dot", "size": 25, "title": "Madrid\nPa\u00eds: Brasil\nGrau Total: 4\nGrau Entrada: 2\nGrau Sa\u00edda: 2"}, {"color": "#FF6B6B", "font": {"color": "black"}, "id": "Miami", "label": "Miami", "shape": "dot", "size": 25, "title": "Miami\nPa\u00eds: Estados Unidos\nGrau Total: 18\nGrau Entrada: 9\nGrau Sa\u00edda: 9"}, {"color": "#4ECDC4", "font": {"color": "black"}, "id": "New York", "label": "New York", "shape": "dot", "size": 25, "title": "New York\nPa\u00eds: Brasil\nGrau Total: 4\nGrau Entrada: 2\nGrau Sa\u00edda: 2"}, {"color": "#4ECDC4", "font": {"color": "black"}, "id": "Paris", "label": "Paris", "shape": "dot", "size": 25, "title": "Paris\nPa\u00eds: Brasil\nGrau Total: 6\nGrau Entrada: 3\nGrau Sa\u00edda: 3"}, {"color": "#4ECDC4", "font": {"color": "black"}, "id": "Porto Seguro", "label": "Porto Seguro", "shape": "dot", "size": 25, "title": "Porto Seguro\nPa\u00eds: Brasil\nGrau Total: 4\nGrau Entrada: 2\nGrau Sa\u00edda: 2"}, {"color": "#4ECDC4", "font": {"color": "black"}, "id": "Presidente Juscelino Kubitschek", "label": "Presidente Juscelino Kubitschek", "shape": "dot", "size": 25, "title": "Presidente Juscelino Kubitschek\nPa\u00eds: Brasil\nGrau Total: 4\nGrau Entrada: 2\nGrau Sa\u00edda: 2"}, {"color": "#4ECDC4", "font": {"color": "black"}, "id": "Salgado Filho", "label": "Salgado Filho", "shape": "dot", "size": 25, "title": "Salgado Filho\nPa\u00eds: Brasil\nGrau Total: 6\nGrau Entrada: 3\nGrau Sa\u00edda: 3"}, {"color": "#4ECDC4", "font": {"color": "black"}, "id": "Tancredo Neves", "label": "Tancredo Neves", "shape": "dot", "size": 25, "title": "Tancredo Neves\nPa\u00eds: Brasil\nGrau Total: 2\nGrau Entrada: 1\nGrau Sa\u00edda: 1"}, {"color": "#4ECDC4", "font": {"color": "black"}, "id": "Toronto", "label": "Toronto", "shape": "dot", "size": 25, "title": "Toronto\nPa\u00eds: Brasil\nGrau Total: 4\nGrau Entrada: 2\nGrau Sa\u00edda: 2"}, {"color": "#4ECDC4", "font": {"color": "black"}, "id": "Viracopos", "label": "Viracopos", "shape": "dot", "size": 25, "title": "Viracopos\nPa\u00eds: Brasil\nGrau Total: 2\nGrau Entrada: 1\nGrau Sa\u00edda: 1"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": "#95a5a6", "from": "Afonso Pena", "title": "Afonso Pena \u2192 Salgado Filho\nVoos: 31", "to": "Salgado Filho", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Salgado Filho", "title": "Salgado Filho \u2192 Miami\nVoos: 31", "to": "Miami", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Salgado Filho", "title": "Salgado Filho \u2192 Buenos Aires\nVoos: 10", "to": "Buenos Aires", "value": 10.0, "width": 3.0}, {"arrows": "to", "color": "#95a5a6", "from": "Salgado Filho", "title": "Salgado Filho \u2192 Buenos Aires/Aeroparque\nVoos: 26", "to": "Buenos Aires/Aeroparque", "value": 26.0, "width": 6.2}, {"arrows": "to", "color": "#95a5a6", "from": "Miami", "title": "Miami \u2192 Afonso Pena\nVoos: 31", "to": "Afonso Pena", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Miami", "title": "Miami \u2192 Presidente Juscelino Kubitschek\nVoos: 31", "to": "Presidente Juscelino Kubitschek", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Miami", "title": "Miami \u2192 Deputado Luis Eduardo Magalhaes\nVoos: 17", "to": "Deputado Luis Eduardo Magalhaes", "value": 17.0, "width": 4.4}, {"arrows": "to", "color": "#95a5a6", "from": "Miami", "title": "Miami \u2192 Guarulhos - Governador Andre Franco Montoro\nVoos: 88", "to": "Guarulhos - Governador Andre Franco Montoro", "value": 88.0, "width": 18.6}, {"arrows": "to", "color": "#95a5a6", "from": "Miami", "title": "Miami \u2192 Guararapes - Gilberto Freyre\nVoos: 27", "to": "Guararapes - Gilberto Freyre", "value": 27.0, "width": 6.4}, {"arrows": "to", "color": "#95a5a6", "from": "Miami", "title": "Miami \u2192 Aeroporto Internacional Do Rio De Janeiro/Galeao\nVoos: 50", "to": "Aeroporto Internacional Do Rio De Janeiro/Galeao", "value": 50.0, "width": 11.0}, {"arrows": "to", "color": "#95a5a6", "from": "Miami", "title": "Miami \u2192 Viracopos\nVoos: 31", "to": "Viracopos", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Miami", "title": "Miami \u2192 Eduardo Gomes\nVoos: 31", "to": "Eduardo Gomes", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Miami", "title": "Miami \u2192 Tancredo Neves\nVoos: 31", "to": "Tancredo Neves", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Presidente Juscelino Kubitschek", "title": "Presidente Juscelino Kubitschek \u2192 Miami\nVoos: 31", "to": "Miami", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Presidente Juscelino Kubitschek", "title": "Presidente Juscelino Kubitschek \u2192 Paris\nVoos: 13", "to": "Paris", "value": 13.0, "width": 3.6}, {"arrows": "to", "color": "#95a5a6", "from": "Deputado Luis Eduardo Magalhaes", "title": "Deputado Luis Eduardo Magalhaes \u2192 Miami\nVoos: 17", "to": "Miami", "value": 17.0, "width": 4.4}, {"arrows": "to", "color": "#95a5a6", "from": "Deputado Luis Eduardo Magalhaes", "title": "Deputado Luis Eduardo Magalhaes \u2192 Madrid\nVoos: 13", "to": "Madrid", "value": 13.0, "width": 3.6}, {"arrows": "to", "color": "#95a5a6", "from": "Deputado Luis Eduardo Magalhaes", "title": "Deputado Luis Eduardo Magalhaes \u2192 Buenos Aires\nVoos: 27", "to": "Buenos Aires", "value": 27.0, "width": 6.4}, {"arrows": "to", "color": "#95a5a6", "from": "Guarulhos - Governador Andre Franco Montoro", "title": "Guarulhos - Governador Andre Franco Montoro \u2192 Miami\nVoos: 93", "to": "Miami", "value": 93.0, "width": 19.6}, {"arrows": "to", "color": "#95a5a6", "from": "Guarulhos - Governador Andre Franco Montoro", "title": "Guarulhos - Governador Andre Franco Montoro \u2192 New York\nVoos: 31", "to": "New York", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Guarulhos - Governador Andre Franco Montoro", "title": "Guarulhos - Governador Andre Franco Montoro \u2192 Toronto\nVoos: 31", "to": "Toronto", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Guarulhos - Governador Andre Franco Montoro", "title": "Guarulhos - Governador Andre Franco Montoro \u2192 Madrid\nVoos: 31", "to": "Madrid", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Guarulhos - Governador Andre Franco Montoro", "title": "Guarulhos - Governador Andre Franco Montoro \u2192 Paris\nVoos: 62", "to": "Paris", "value": 62.0, "width": 13.4}, {"arrows": "to", "color": "#95a5a6", "from": "Guarulhos - Governador Andre Franco Montoro", "title": "Guarulhos - Governador Andre Franco Montoro \u2192 Bogota\nVoos: 31", "to": "Bogota", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Guarulhos - Governador Andre Franco Montoro", "title": "Guarulhos - Governador Andre Franco Montoro \u2192 Buenos Aires/Aeroparque\nVoos: 81", "to": "Buenos Aires/Aeroparque", "value": 81.0, "width": 17.2}, {"arrows": "to", "color": "#95a5a6", "from": "Guararapes - Gilberto Freyre", "title": "Guararapes - Gilberto Freyre \u2192 Miami\nVoos: 27", "to": "Miami", "value": 27.0, "width": 6.4}, {"arrows": "to", "color": "#95a5a6", "from": "Aeroporto Internacional Do Rio De Janeiro/Galeao", "title": "Aeroporto Internacional Do Rio De Janeiro/Galeao \u2192 Miami\nVoos: 49", "to": "Miami", "value": 49.0, "width": 10.8}, {"arrows": "to", "color": "#95a5a6", "from": "Aeroporto Internacional Do Rio De Janeiro/Galeao", "title": "Aeroporto Internacional Do Rio De Janeiro/Galeao \u2192 New York\nVoos: 31", "to": "New York", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Aeroporto Internacional Do Rio De Janeiro/Galeao", "title": "Aeroporto Internacional Do Rio De Janeiro/Galeao \u2192 Toronto\nVoos: 13", "to": "Toronto", "value": 13.0, "width": 3.6}, {"arrows": "to", "color": "#95a5a6", "from": "Aeroporto Internacional Do Rio De Janeiro/Galeao", "title": "Aeroporto Internacional Do Rio De Janeiro/Galeao \u2192 Paris\nVoos: 49", "to": "Paris", "value": 49.0, "width": 10.8}, {"arrows": "to", "color": "#95a5a6", "from": "Aeroporto Internacional Do Rio De Janeiro/Galeao", "title": "Aeroporto Internacional Do Rio De Janeiro/Galeao \u2192 Buenos Aires/Aeroparque\nVoos: 74", "to": "Buenos Aires/Aeroparque", "value": 74.0, "width": 15.8}, {"arrows": "to", "color": "#95a5a6", "from": "Aeroporto Internacional Do Rio De Janeiro/Galeao", "title": "Aeroporto Internacional Do Rio De Janeiro/Galeao \u2192 Buenos Aires\nVoos: 66", "to": "Buenos Aires", "value": 66.0, "width": 14.2}, {"arrows": "to", "color": "#95a5a6", "from": "New York", "title": "New York \u2192 Guarulhos - Governador Andre Franco Montoro\nVoos: 31", "to": "Guarulhos - Governador Andre Franco Montoro", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "New York", "title": "New York \u2192 Aeroporto Internacional Do Rio De Janeiro/Galeao\nVoos: 31", "to": "Aeroporto Internacional Do Rio De Janeiro/Galeao", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Eduardo Gomes", "title": "Eduardo Gomes \u2192 Miami\nVoos: 31", "to": "Miami", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Tancredo Neves", "title": "Tancredo Neves \u2192 Miami\nVoos: 31", "to": "Miami", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Viracopos", "title": "Viracopos \u2192 Miami\nVoos: 31", "to": "Miami", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Toronto", "title": "Toronto \u2192 Guarulhos - Governador Andre Franco Montoro\nVoos: 31", "to": "Guarulhos - Governador Andre Franco Montoro", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Toronto", "title": "Toronto \u2192 Aeroporto Internacional Do Rio De Janeiro/Galeao\nVoos: 13", "to": "Aeroporto Internacional Do Rio De Janeiro/Galeao", "value": 13.0, "width": 3.6}, {"arrows": "to", "color": "#95a5a6", "from": "Madrid", "title": "Madrid \u2192 Guarulhos - Governador Andre Franco Montoro\nVoos: 31", "to": "Guarulhos - Governador Andre Franco Montoro", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Madrid", "title": "Madrid \u2192 Deputado Luis Eduardo Magalhaes\nVoos: 13", "to": "Deputado Luis Eduardo Magalhaes", "value": 13.0, "width": 3.6}, {"arrows": "to", "color": "#95a5a6", "from": "Paris", "title": "Paris \u2192 Aeroporto Internacional Do Rio De Janeiro/Galeao\nVoos: 49", "to": "Aeroporto Internacional Do Rio De Janeiro/Galeao", "value": 49.0, "width": 10.8}, {"arrows": "to", "color": "#95a5a6", "from": "Paris", "title": "Paris \u2192 Guarulhos - Governador Andre Franco Montoro\nVoos: 62", "to": "Guarulhos - Governador Andre Franco Montoro", "value": 62.0, "width": 13.4}, {"arrows": "to", "color": "#95a5a6", "from": "Paris", "title": "Paris \u2192 Presidente Juscelino Kubitschek\nVoos: 13", "to": "Presidente Juscelino Kubitschek", "value": 13.0, "width": 3.6}, {"arrows": "to", "color": "#95a5a6", "from": "Bogota", "title": "Bogota \u2192 Guarulhos - Governador Andre Franco Montoro\nVoos: 31", "to": "Guarulhos - Governador Andre Franco Montoro", "value": 31.0, "width": 7.2}, {"arrows": "to", "color": "#95a5a6", "from": "Buenos Aires", "title": "Buenos Aires \u2192 Salgado Filho\nVoos: 10", "to": "Salgado Filho", "value": 10.0, "width": 3.0}, {"arrows": "to", "color": "#95a5a6", "from": "Buenos Aires", "title": "Buenos Aires \u2192 Aeroporto Internacional Do Rio De Janeiro/Galeao\nVoos: 66", "to": "Aeroporto Internacional Do Rio De Janeiro/Galeao", "value": 66.0, "width": 14.2}, {"arrows": "to", "color": "#95a5a6", "from": "Buenos Aires", "title": "Buenos Aires \u2192 Hercilio Luz\nVoos: 27", "to": "Hercilio Luz", "value": 27.0, "width": 6.4}, {"arrows": "to", "color": "#95a5a6", "from": "Buenos Aires", "title": "Buenos Aires \u2192 Deputado Luis Eduardo Magalhaes\nVoos: 27", "to": "Deputado Luis Eduardo Magalhaes", "value": 27.0, "width": 6.4}, {"arrows": "to", "color": "#95a5a6", "from": "Buenos Aires", "title": "Buenos Aires \u2192 Porto Seguro\nVoos: 5", "to": "Porto Seguro", "value": 5.0, "width": 2.0}, {"arrows": "to", "color": "#95a5a6", "from": "Buenos Aires/Aeroparque", "title": "Buenos Aires/Aeroparque \u2192 Guarulhos - Governador Andre Franco Montoro\nVoos: 94", "to": "Guarulhos - Governador Andre Franco Montoro", "value": 94.0, "width": 19.8}, {"arrows": "to", "color": "#95a5a6", "from": "Buenos Aires/Aeroparque", "title": "Buenos Aires/Aeroparque \u2192 Aeroporto Internacional Do Rio De Janeiro/Galeao\nVoos: 74", "to": "Aeroporto Internacional Do Rio De Janeiro/Galeao", "value": 74.0, "width": 15.8}, {"arrows": "to", "color": "#95a5a6", "from": "Buenos Aires/Aeroparque", "title": "Buenos Aires/Aeroparque \u2192 Hercilio Luz\nVoos: 10", "to": "Hercilio Luz", "value": 10.0, "width": 3.0}, {"arrows": "to", "color": "#95a5a6", "from": "Buenos Aires/Aeroparque", "title": "Buenos Aires/Aeroparque \u2192 Porto Seguro\nVoos: 8", "to": "Porto Seguro", "value": 8.0, "width": 2.6}, {"arrows": "to", "color": "#95a5a6", "from": "Buenos Aires/Aeroparque", "title": "Buenos Aires/Aeroparque \u2192 Salgado Filho\nVoos: 26", "to": "Salgado Filho", "value": 26.0, "width": 6.2}, {"arrows": "to", "color": "#95a5a6", "from": "Hercilio Luz", "title": "Hercilio Luz \u2192 Buenos Aires/Aeroparque\nVoos: 10", "to": "Buenos Aires/Aeroparque", "value": 10.0, "width": 3.0}, {"arrows": "to", "color": "#95a5a6", "from": "Hercilio Luz", "title": "Hercilio Luz \u2192 Buenos Aires\nVoos: 27", "to": "Buenos Aires", "value": 27.0, "width": 6.4}, {"arrows": "to", "color": "#95a5a6", "from": "Porto Seguro", "title": "Porto Seguro \u2192 Buenos Aires/Aeroparque\nVoos: 8", "to": "Buenos Aires/Aeroparque", "value": 8.0, "width": 2.6}, {"arrows": "to", "color": "#95a5a6", "from": "Porto Seguro", "title": "Porto Seguro \u2192 Buenos Aires\nVoos: 5", "to": "Buenos Aires", "value": 5.0, "width": 2.0}]);
 
                   nodeColors = {};
                   allNodes = nodes.get({ returnType: "Object" });
@@ -122,7 +321,7 @@
                   // adding nodes and edges to the graph
                   data = {nodes: nodes, edges: edges};
 
-                  var options = {"physics": {"enabled": true, "solver": "barnesHut", "barnesHut": {"gravitationalConstant": -8000, "centralGravity": 0.3, "springLength": 250, "springConstant": 0.04, "damping": 0.09, "avoidOverlap": 0.1}, "stabilization": {"enabled": true, "iterations": 2000, "updateInterval": 25}}, "nodes": {"font": {"size": 16, "face": "arial", "bold": true}, "borderWidth": 2, "shadow": true}, "edges": {"smooth": {"enabled": true, "type": "dynamic"}, "shadow": true}};
+                  var options = {"physics": {"enabled": true, "solver": "barnesHut", "barnesHut": {"gravitationalConstant": -15000, "centralGravity": 0.1, "springLength": 400, "springConstant": 0.02, "damping": 0.15, "avoidOverlap": 0.5}, "stabilization": {"enabled": true, "iterations": 2000, "updateInterval": 25}}, "nodes": {"font": {"size": 14, "face": "arial"}, "borderWidth": 2, "shadow": true}, "edges": {"smooth": {"enabled": true, "type": "continuous"}, "shadow": false}};
 
                   
 

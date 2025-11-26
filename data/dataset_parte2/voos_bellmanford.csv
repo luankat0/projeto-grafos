@@ -1,0 +1,26 @@
+aeroporto_origem,pais_origem,aeroporto_destino,pais_destino,voos
+Aeroporto Internacional Do Rio De Janeiro/Galeao - Rio De Janeiro,Brasil,Afonso Pena - Sao Jose Dos Pinhais,Brasil,45
+Afonso Pena - Sao Jose Dos Pinhais,Brasil,Bogota - Bogota,Colombia,99
+Bogota - Bogota,Colombia,Buenos Aires - Buenos Aires,Argentina,-48
+Buenos Aires - Buenos Aires,Argentina,Buenos Aires/Aeroparque - Buenos Aires/Aeroparque,Argentina,77
+Buenos Aires/Aeroparque - Buenos Aires/Aeroparque,Argentina,Deputado Luis Eduardo Magalhaes - Salvador,Brasil,-62
+Deputado Luis Eduardo Magalhaes - Salvador,Brasil,Eduardo Gomes - Manaus,Brasil,75
+Eduardo Gomes - Manaus,Brasil,Guararapes - Gilberto Freyre - Recife,Brasil,48
+Guararapes - Gilberto Freyre - Recife,Brasil,Guarulhos - Governador Andre Franco Montoro - Guarulhos,Brasil,12
+Guarulhos - Governador Andre Franco Montoro - Guarulhos,Brasil,Hercilio Luz - Florianopolis,Brasil,9
+Hercilio Luz - Florianopolis,Brasil,Madrid - Madrid,Espanha,118
+Madrid - Madrid,Espanha,Miami - Miami,Estados Unidos,-40
+Miami - Miami,Estados Unidos,New York - New York,Estados Unidos,46
+New York - New York,Estados Unidos,Paris - Paris,Franca,-29
+Paris - Paris,Franca,Porto Seguro - Porto Seguro,Brasil,20
+Porto Seguro - Porto Seguro,Brasil,Presidente Juscelino Kubitschek - Brasilia,Brasil,48
+Presidente Juscelino Kubitschek - Brasilia,Brasil,Salgado Filho - Porto Alegre,Brasil,92
+Salgado Filho - Porto Alegre,Brasil,Tancredo Neves - Confins,Brasil,139
+Tancredo Neves - Confins,Brasil,Toronto - Toronto,Canada,-14
+Toronto - Toronto,Canada,Viracopos - Campinas,Brasil,129
+Miami - Miami,Estados Unidos,Toronto - Toronto,Canada,43
+Hercilio Luz - Florianopolis,Brasil,Toronto - Toronto,Canada,29
+Tancredo Neves - Confins,Brasil,Miami - Miami,Estados Unidos,109
+Deputado Luis Eduardo Magalhaes - Salvador,Brasil,Tancredo Neves - Confins,Brasil,33
+New York - New York,Estados Unidos,Afonso Pena - Sao Jose Dos Pinhais,Brasil,108
+Miami - Miami,Estados Unidos,Guararapes - Gilberto Freyre - Recife,Brasil,110

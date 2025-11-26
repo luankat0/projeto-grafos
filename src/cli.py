@@ -31,7 +31,8 @@ def main():
         (base_path / "utils" / "calcular_metricas.py", "Calcular métricas do grafo"),
         (base_path / "utils" / "calcular_distancias.py", "Calcular distâncias com Dijkstra"),
         (base_path / "utils" / "voos_analise.py", "Analisar rede de voos"),
-        (base_path / "viz.py", "Gerar visualizações interativas"),
+        (base_path / "utils" / "gerar_voos_bellmanford.py", "Gerar csv Bellman-Ford"),
+        (base_path / "viz.py", "Gerar visualizações interativas")
     ]
     
     sucessos = 0
