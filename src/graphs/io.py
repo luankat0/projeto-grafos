@@ -157,6 +157,10 @@ def _criar_menu_navegacao():
             <span class="icon">✈️</span>
             <span>Grafo de Voos</span>
         </a>
+        <a href="caminho_bellmanford.html" class="menu-link">
+            <span class="icon">🔄</span>
+            <span>Caminho Bellman-Ford</span>
+        </a>
     </div>
 </nav>
 

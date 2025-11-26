@@ -900,6 +900,8 @@ def gerar_caminho_bellmanford_html(base_path: Path):
     html_content = net.generate_html()
     
     num_arestas_negativas = len(arestas_negativas)
+    total_arestas_grafo = sum(len(vizinhos) for vizinhos in grafo.values())
+    num_arestas_no_caminho = len(caminho) - 1 if len(caminho) > 1 else 0
     
     legenda = f"""
 <div style="position:fixed;top:10px;left:10px;z-index:999;background:rgba(255,255,255,0.95);padding:15px;border-radius:8px;border:2px solid #ddd;box-shadow:0 4px 8px rgba(0,0,0,0.2);">
@@ -932,22 +934,31 @@ def gerar_caminho_bellmanford_html(base_path: Path):
             <span>Peso positivo (voos normais)</span>
         </div>
         <div style="margin-top:12px;padding-top:8px;border-top:1px solid #ddd;">
-            <strong>Estatísticas:</strong>
+            <strong>Estatísticas do Grafo:</strong>
+        </div>
+        <div style="margin:4px 0;font-size:11px;">
+            • Total de aeroportos: <strong>{len(aeroportos)}</strong>
+        </div>
+        <div style="margin:4px 0;font-size:11px;">
+            • Total de conexões: <strong>{total_arestas_grafo}</strong>
+        </div>
+        <div style="margin:4px 0;font-size:11px;">
+            • Conexões negativas: <strong>{num_arestas_negativas}</strong>
+        </div>
+        <div style="margin-top:12px;padding-top:8px;border-top:1px solid #ddd;">
+            <strong>Estatísticas do Caminho:</strong>
         </div>
         <div style="margin:4px 0;font-size:11px;">
             • Algoritmo: <strong>Bellman-Ford</strong>
         </div>
         <div style="margin:4px 0;font-size:11px;">
-            • Aeroportos no grafo: <strong>{len(aeroportos)}</strong>
-        </div>
-        <div style="margin:4px 0;font-size:11px;">
             • Aeroportos no caminho: <strong>{len(caminho)}</strong>
         </div>
         <div style="margin:4px 0;font-size:11px;">
-            • Arestas negativas: <strong>{num_arestas_negativas}</strong>
+            • Arestas no caminho: <strong>{num_arestas_no_caminho}</strong>
         </div>
         <div style="margin:4px 0;font-size:11px;">
-            • Ciclo negativo: <strong>{'Sim' if resultado['has_negative_cycle'] else 'Não'}</strong>
+            • Ciclo negativo detectado: <strong>{'Sim' if resultado['has_negative_cycle'] else 'Não'}</strong>
         </div>
     </div>
 </div>

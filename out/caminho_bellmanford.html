@@ -242,7 +242,7 @@
 
 
 <div style="position:fixed;top:10px;left:10px;z-index:999;background:rgba(255,255,255,0.95);padding:15px;border-radius:8px;border:2px solid #ddd;box-shadow:0 4px 8px rgba(0,0,0,0.2);">
-    <h3 style="margin:0 0 10px 0;color:#333;font-size:16px;border-bottom:2px solid #ddd;padding-bottom:8px;">Bellman-Ford: Aeroporto Internacional Do Rio De Janeiro/Galeao → Salgado Filho (Custo: 430.0)</h3>
+    <h3 style="margin:0 0 10px 0;color:#333;font-size:16px;border-bottom:2px solid #ddd;padding-bottom:8px;">Bellman-Ford: Aeroporto Internacional Do Rio De Janeiro/Galeao → Salgado Filho (Custo: 550.0)</h3>
     <div style="font-size:12px;">
         <div style="margin:8px 0;">
             <strong>Legenda dos Nós:</strong>
@@ -271,22 +271,31 @@
             <span>Peso positivo (voos normais)</span>
         </div>
         <div style="margin-top:12px;padding-top:8px;border-top:1px solid #ddd;">
-            <strong>Estatísticas:</strong>
+            <strong>Estatísticas do Grafo:</strong>
+        </div>
+        <div style="margin:4px 0;font-size:11px;">
+            • Total de aeroportos: <strong>20</strong>
+        </div>
+        <div style="margin:4px 0;font-size:11px;">
+            • Total de conexões: <strong>25</strong>
+        </div>
+        <div style="margin:4px 0;font-size:11px;">
+            • Conexões negativas: <strong>5</strong>
+        </div>
+        <div style="margin-top:12px;padding-top:8px;border-top:1px solid #ddd;">
+            <strong>Estatísticas do Caminho:</strong>
         </div>
         <div style="margin:4px 0;font-size:11px;">
             • Algoritmo: <strong>Bellman-Ford</strong>
         </div>
         <div style="margin:4px 0;font-size:11px;">
-            • Aeroportos no grafo: <strong>20</strong>
+            • Aeroportos no caminho: <strong>9</strong>
         </div>
         <div style="margin:4px 0;font-size:11px;">
-            • Aeroportos no caminho: <strong>13</strong>
+            • Arestas no caminho: <strong>8</strong>
         </div>
         <div style="margin:4px 0;font-size:11px;">
-            • Arestas negativas: <strong>5</strong>
-        </div>
-        <div style="margin:4px 0;font-size:11px;">
-            • Ciclo negativo: <strong>Não</strong>
+            • Ciclo negativo detectado: <strong>Não</strong>
         </div>
     </div>
 </div>
@@ -328,8 +337,8 @@
                   
 
                   // parsing and collecting nodes and edges from the python
-                  nodes = new vis.DataSet([{"color": "#2ecc71", "font": {"color": "black", "size": 14}, "id": "Aeroporto Internacional Do Rio De Janeiro/Galeao - Rio De Janeiro", "label": "Aeroporto Internacional Do Rio De Janeiro/Galeao", "shape": "dot", "size": 35, "title": "Aeroporto Internacional Do Rio De Janeiro/Galeao - Rio De Janeiro\nPa\u00eds: Brasil"}, {"color": "#95a5a6", "font": {"color": "black", "size": 14}, "id": "Afonso Pena - Sao Jose Dos Pinhais", "label": "Afonso Pena", "shape": "dot", "size": 25, "title": "Afonso Pena - Sao Jose Dos Pinhais\nPa\u00eds: Brasil"}, {"color": "#95a5a6", "font": {"color": "black", "size": 14}, "id": "Bogota - Bogota", "label": "Bogota", "shape": "dot", "size": 25, "title": "Bogota - Bogota\nPa\u00eds: Colombia"}, {"color": "#95a5a6", "font": {"color": "black", "size": 14}, "id": "Buenos Aires - Buenos Aires", "label": "Buenos Aires", "shape": "dot", "size": 25, "title": "Buenos Aires - Buenos Aires\nPa\u00eds: Argentina"}, {"color": "#95a5a6", "font": {"color": "black", "size": 14}, "id": "Buenos Aires/Aeroparque - Buenos Aires/Aeroparque", "label": "Buenos Aires/Aeroparque", "shape": "dot", "size": 25, "title": "Buenos Aires/Aeroparque - Buenos Aires/Aeroparque\nPa\u00eds: Argentina"}, {"color": "#95a5a6", "font": {"color": "black", "size": 14}, "id": "Deputado Luis Eduardo Magalhaes - Salvador", "label": "Deputado Luis Eduardo Magalhaes", "shape": "dot", "size": 25, "title": "Deputado Luis Eduardo Magalhaes - Salvador\nPa\u00eds: Brasil"}, {"color": "#95a5a6", "font": {"color": "black", "size": 14}, "id": "Tancredo Neves - Confins", "label": "Tancredo Neves", "shape": "dot", "size": 25, "title": "Tancredo Neves - Confins\nPa\u00eds: Brasil"}, {"color": "#95a5a6", "font": {"color": "black", "size": 14}, "id": "Miami - Miami", "label": "Miami", "shape": "dot", "size": 25, "title": "Miami - Miami\nPa\u00eds: Estados Unidos"}, {"color": "#95a5a6", "font": {"color": "black", "size": 14}, "id": "New York - New York", "label": "New York", "shape": "dot", "size": 25, "title": "New York - New York\nPa\u00eds: Estados Unidos"}, {"color": "#95a5a6", "font": {"color": "black", "size": 14}, "id": "Paris - Paris", "label": "Paris", "shape": "dot", "size": 25, "title": "Paris - Paris\nPa\u00eds: Franca"}, {"color": "#95a5a6", "font": {"color": "black", "size": 14}, "id": "Porto Seguro - Porto Seguro", "label": "Porto Seguro", "shape": "dot", "size": 25, "title": "Porto Seguro - Porto Seguro\nPa\u00eds: Brasil"}, {"color": "#95a5a6", "font": {"color": "black", "size": 14}, "id": "Presidente Juscelino Kubitschek - Brasilia", "label": "Presidente Juscelino Kubitschek", "shape": "dot", "size": 25, "title": "Presidente Juscelino Kubitschek - Brasilia\nPa\u00eds: Brasil"}, {"color": "#3498db", "font": {"color": "black", "size": 14}, "id": "Salgado Filho - Porto Alegre", "label": "Salgado Filho", "shape": "dot", "size": 35, "title": "Salgado Filho - Porto Alegre\nPa\u00eds: Brasil"}]);
-                  edges = new vis.DataSet([{"arrows": "to", "color": "#34495e", "from": "Aeroporto Internacional Do Rio De Janeiro/Galeao - Rio De Janeiro", "title": "Voos: 45", "to": "Afonso Pena - Sao Jose Dos Pinhais", "value": 45.0, "width": 2}, {"arrows": "to", "color": "#34495e", "from": "Afonso Pena - Sao Jose Dos Pinhais", "title": "Voos: 99", "to": "Bogota - Bogota", "value": 99.0, "width": 2}, {"arrows": "to", "color": "#e74c3c", "from": "Bogota - Bogota", "title": "Voos: -48", "to": "Buenos Aires - Buenos Aires", "value": 48.0, "width": 4}, {"arrows": "to", "color": "#34495e", "from": "Buenos Aires - Buenos Aires", "title": "Voos: 77", "to": "Buenos Aires/Aeroparque - Buenos Aires/Aeroparque", "value": 77.0, "width": 2}, {"arrows": "to", "color": "#e74c3c", "from": "Buenos Aires/Aeroparque - Buenos Aires/Aeroparque", "title": "Voos: -62", "to": "Deputado Luis Eduardo Magalhaes - Salvador", "value": 62.0, "width": 4}, {"arrows": "to", "color": "#34495e", "from": "Deputado Luis Eduardo Magalhaes - Salvador", "title": "Voos: 33", "to": "Tancredo Neves - Confins", "value": 33.0, "width": 2}, {"arrows": "to", "color": "#34495e", "from": "Tancredo Neves - Confins", "title": "Voos: 109", "to": "Miami - Miami", "value": 109.0, "width": 2}, {"arrows": "to", "color": "#34495e", "from": "Miami - Miami", "title": "Voos: 46", "to": "New York - New York", "value": 46.0, "width": 2}, {"arrows": "to", "color": "#e74c3c", "from": "New York - New York", "title": "Voos: -29", "to": "Paris - Paris", "value": 29.0, "width": 4}, {"arrows": "to", "color": "#34495e", "from": "Paris - Paris", "title": "Voos: 20", "to": "Porto Seguro - Porto Seguro", "value": 20.0, "width": 2}, {"arrows": "to", "color": "#34495e", "from": "Porto Seguro - Porto Seguro", "title": "Voos: 48", "to": "Presidente Juscelino Kubitschek - Brasilia", "value": 48.0, "width": 2}, {"arrows": "to", "color": "#34495e", "from": "Presidente Juscelino Kubitschek - Brasilia", "title": "Voos: 92", "to": "Salgado Filho - Porto Alegre", "value": 92.0, "width": 2}]);
+                  nodes = new vis.DataSet([{"color": "#2ecc71", "font": {"color": "black", "size": 14}, "id": "Aeroporto Internacional Do Rio De Janeiro/Galeao - Rio De Janeiro", "label": "Aeroporto Internacional Do Rio De Janeiro/Galeao", "shape": "dot", "size": 35, "title": "Aeroporto Internacional Do Rio De Janeiro/Galeao - Rio De Janeiro\nPa\u00eds: Brasil"}, {"color": "#95a5a6", "font": {"color": "black", "size": 14}, "id": "Hercilio Luz - Florianopolis", "label": "Hercilio Luz", "shape": "dot", "size": 25, "title": "Hercilio Luz - Florianopolis\nPa\u00eds: Brasil"}, {"color": "#95a5a6", "font": {"color": "black", "size": 14}, "id": "Madrid - Madrid", "label": "Madrid", "shape": "dot", "size": 25, "title": "Madrid - Madrid\nPa\u00eds: Espanha"}, {"color": "#95a5a6", "font": {"color": "black", "size": 14}, "id": "Miami - Miami", "label": "Miami", "shape": "dot", "size": 25, "title": "Miami - Miami\nPa\u00eds: Estados Unidos"}, {"color": "#95a5a6", "font": {"color": "black", "size": 14}, "id": "New York - New York", "label": "New York", "shape": "dot", "size": 25, "title": "New York - New York\nPa\u00eds: Estados Unidos"}, {"color": "#95a5a6", "font": {"color": "black", "size": 14}, "id": "Paris - Paris", "label": "Paris", "shape": "dot", "size": 25, "title": "Paris - Paris\nPa\u00eds: Franca"}, {"color": "#95a5a6", "font": {"color": "black", "size": 14}, "id": "Porto Seguro - Porto Seguro", "label": "Porto Seguro", "shape": "dot", "size": 25, "title": "Porto Seguro - Porto Seguro\nPa\u00eds: Brasil"}, {"color": "#95a5a6", "font": {"color": "black", "size": 14}, "id": "Presidente Juscelino Kubitschek - Brasilia", "label": "Presidente Juscelino Kubitschek", "shape": "dot", "size": 25, "title": "Presidente Juscelino Kubitschek - Brasilia\nPa\u00eds: Brasil"}, {"color": "#3498db", "font": {"color": "black", "size": 14}, "id": "Salgado Filho - Porto Alegre", "label": "Salgado Filho", "shape": "dot", "size": 35, "title": "Salgado Filho - Porto Alegre\nPa\u00eds: Brasil"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": "#34495e", "from": "Aeroporto Internacional Do Rio De Janeiro/Galeao - Rio De Janeiro", "title": "Voos: 101", "to": "Hercilio Luz - Florianopolis", "value": 101.0, "width": 2}, {"arrows": "to", "color": "#e74c3c", "from": "Hercilio Luz - Florianopolis", "title": "Voos: -73", "to": "Madrid - Madrid", "value": 73.0, "width": 4}, {"arrows": "to", "color": "#34495e", "from": "Madrid - Madrid", "title": "Voos: 94", "to": "Miami - Miami", "value": 94.0, "width": 2}, {"arrows": "to", "color": "#34495e", "from": "Miami - Miami", "title": "Voos: 43", "to": "New York - New York", "value": 43.0, "width": 2}, {"arrows": "to", "color": "#34495e", "from": "New York - New York", "title": "Voos: 144", "to": "Paris - Paris", "value": 144.0, "width": 2}, {"arrows": "to", "color": "#34495e", "from": "Paris - Paris", "title": "Voos: 42", "to": "Porto Seguro - Porto Seguro", "value": 42.0, "width": 2}, {"arrows": "to", "color": "#34495e", "from": "Porto Seguro - Porto Seguro", "title": "Voos: 75", "to": "Presidente Juscelino Kubitschek - Brasilia", "value": 75.0, "width": 2}, {"arrows": "to", "color": "#34495e", "from": "Presidente Juscelino Kubitschek - Brasilia", "title": "Voos: 124", "to": "Salgado Filho - Porto Alegre", "value": 124.0, "width": 2}]);
 
                   nodeColors = {};
                   allNodes = nodes.get({ returnType: "Object" });

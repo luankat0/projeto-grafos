@@ -44,7 +44,7 @@
       "cidade": "Miami",
       "nodes_reached": 20,
       "layers": 4,
-      "time_ms": 1.557,
+      "time_ms": 0.671,
       "memory_kb": 4.83
     },
     "bfs_Guarulhos - Governador Andre Franco Montoro": {
@@ -52,7 +52,7 @@
       "cidade": "Guarulhos",
       "nodes_reached": 20,
       "layers": 4,
-      "time_ms": 0.063,
+      "time_ms": 0.062,
       "memory_kb": 4.8
     },
     "bfs_Aeroporto Internacional Do Rio De Janeiro/Galeao": {
@@ -60,7 +60,7 @@
       "cidade": "Rio De Janeiro",
       "nodes_reached": 20,
       "layers": 4,
-      "time_ms": 0.05,
+      "time_ms": 0.051,
       "memory_kb": 4.69
     },
     "dfs_Aeroporto Internacional Do Rio De Janeiro/Galeao": {
@@ -68,7 +68,7 @@
       "cidade": "Rio De Janeiro",
       "nodes_reached": 20,
       "has_cycle": true,
-      "time_ms": 0.704,
+      "time_ms": 0.065,
       "memory_kb": 4.19
     },
     "dfs_Buenos Aires/Aeroparque": {
@@ -76,7 +76,7 @@
       "cidade": "Buenos Aires/Aeroparque",
       "nodes_reached": 20,
       "has_cycle": true,
-      "time_ms": 0.05,
+      "time_ms": 0.051,
       "memory_kb": 4.23
     },
     "dfs_Buenos Aires": {
@@ -92,7 +92,7 @@
       "destino": "Guarulhos - Governador Andre Franco Montoro (Guarulhos)",
       "cost": 15.24,
       "path_length": 2,
-      "time_ms": 0.089,
+      "time_ms": 0.081,
       "memory_kb": 2.03
     },
     "dijkstra_Miami_to_Buenos Aires/Aeroparque": {
@@ -100,7 +100,7 @@
       "destino": "Buenos Aires/Aeroparque (Buenos Aires/Aeroparque)",
       "cost": 18.92,
       "path_length": 4,
-      "time_ms": 0.103,
+      "time_ms": 0.102,
       "memory_kb": 2.3
     },
     "dijkstra_Guarulhos - Governador Andre Franco Montoro_to_Buenos Aires": {
@@ -116,7 +116,7 @@
       "destino": "Miami (Miami)",
       "cost": 15.51,
       "path_length": 2,
-      "time_ms": 0.043,
+      "time_ms": 0.044,
       "memory_kb": 1.7
     },
     "dijkstra_Buenos Aires/Aeroparque_to_Aeroporto Internacional Do Rio De Janeiro/Galeao": {
@@ -134,7 +134,7 @@
         "Guarulhos - Governador Andre Franco Montoro → Miami (-1.5)"
       ],
       "has_negative_cycle": true,
-      "time_ms": 1.184,
+      "time_ms": 1.193,
       "memory_kb": 2.0
     },
     "bellman_ford_negative_cycle": {
@@ -146,7 +146,7 @@
         "Aeroporto Internacional Do Rio De Janeiro/Galeao",
         "Miami"
       ],
-      "time_ms": 2.024,
+      "time_ms": 1.508,
       "memory_kb": 1.85
     }
   }
