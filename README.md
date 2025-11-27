@@ -11,6 +11,8 @@ A parte 2 da atividade nos deu a liberdade de escolher um dataset já feito, par
 
 [Relatório do projeto](https://docs.google.com/document/d/146yuakC3rTTunMdbwMj97n3TVGowqlBjg2abzfLWA00/edit?usp=sharing)
 
+[Slides](https://www.canva.com/design/DAG5wEKJubs/wA007H0BY9vDq7EVzfZ1zw/view?utm_content=DAG5wEKJubs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hca9fef8210)
+
 [Dataset Parte 2](https://www.kaggle.com/datasets/ramirobentes/flights-in-brazil)
 
 # Como rodar o projeto
